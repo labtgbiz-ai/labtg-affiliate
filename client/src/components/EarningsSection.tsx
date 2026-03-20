@@ -139,23 +139,22 @@ export default function EarningsSection() {
 
           {/* Stage 2 - Partner */}
           <div ref={stage2Ref as any} className="reveal mt-10">
-            <div className="rounded-3xl overflow-hidden shadow-2xl bg-white border border-gray-100">
-              {/* Header */}
-              <div className="bg-gradient-to-r from-[#1E9BF0] to-[#0d7fd8] p-6 md:p-8">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="bg-white/30 text-white text-sm font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-white/50">Этап 2</span>
-                  <h3 className="font-['Raleway'] font-black text-2xl md:text-3xl text-white" style={{textShadow: '0 2px 4px rgba(0,0,0,0.2)'}}>Постоплата</h3>
+            <div className="rounded-3xl overflow-hidden border border-blue-100 shadow-lg">
+              {/* Stage header */}
+              <div className="bg-[#1E9BF0] px-8 py-5 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="bg-white/20 text-white text-sm font-bold px-3 py-1 rounded-full">Этап 2</span>
+                  <h3 className="font-['Raleway'] font-black text-xl md:text-2xl text-white">
+                    Постоплата
+                  </h3>
                 </div>
-                <p className="text-white/90 text-sm md:text-base">
-                  Пассивный доход от подписчиков и лидов
-                </p>
+                <span className="hidden md:block text-white/80 text-sm">Пассивный доход</span>
               </div>
 
               {/* Content */}
-              <div className="p-6 md:p-8">
-                <p className="text-gray-600 text-base mb-6 leading-relaxed">
-                  Когда проект переходит на <strong>постоплату</strong> (LabTG инвестирует в рекламный бюджет клиента), вы начинаете получать процент от подписчиков и лидов.
-                </p>
+              <div className="bg-white p-6 md:p-8">
+
+                <p className="text-gray-600 text-sm font-semibold mb-6">Пассивный доход от подписчиков и лидов</p>
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   {/* Line 1 - Subscribers */}
