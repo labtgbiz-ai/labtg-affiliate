@@ -49,7 +49,7 @@ export default function HeroSection() {
             <div>
               <h1 className="font-['Raleway'] font-black text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-[1.1] tracking-tight">
                 Зарабатывайте{' '}
-                <span className="gradient-text">до 1 000 000 ₽</span>{' '}
+                <span className="gradient-text">от 1 000 000 ₽</span>{' '}
                 рекомендуя LabTG
               </h1>
             </div>

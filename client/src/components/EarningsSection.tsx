@@ -105,7 +105,7 @@ export default function EarningsSection() {
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <div className="text-gray-400 text-sm mb-1">С продаж привлечённого партнёра</div>
-                        <div className="font-['Raleway'] font-black text-4xl text-white">4%</div>
+                        <div className="font-['Raleway'] font-black text-4xl" style={{color: '#0d81fd'}}>4%</div>
                         <div className="text-gray-500 text-xs mt-1">от суммы каждой сделки</div>
                       </div>
                       <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center flex-shrink-0">
