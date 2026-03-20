@@ -47,7 +47,7 @@ export default function HeroSection() {
 
             {/* Headline */}
             <div>
-              <h1 className="font-['Raleway'] font-black text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-[1.1] tracking-tight">
+              <h1 className="font-['Raleway'] font-black text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-[1.1] tracking-tight" style={{paddingTop: '3px', paddingBottom: '92px', paddingLeft: '2px'}}>
                 Зарабатывайте{' '}
                 <span className="gradient-text">от 1 000 000 ₽</span>{' '}
                 рекомендуя LabTG
