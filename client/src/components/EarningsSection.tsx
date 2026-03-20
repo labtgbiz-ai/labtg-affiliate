@@ -33,20 +33,20 @@ export default function EarningsSection() {
         <div className="flex justify-center gap-4 mb-12">
           <button
             onClick={() => setRole('agent')}
-            className={`px-6 py-3 rounded-full font-['Raleway'] font-bold transition-all ${
+            className={`px-8 py-4 rounded-full font-['Raleway'] font-bold text-lg transition-all border-2 ${
               role === 'agent'
-                ? 'bg-[#1E9BF0] text-white shadow-lg'
-                : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                ? 'bg-[#1E9BF0] text-white shadow-lg border-[#1E9BF0]'
+                : 'bg-white text-gray-900 border-gray-300 hover:border-[#1E9BF0]'
             }`}
           >
             Агент
           </button>
           <button
             onClick={() => setRole('partner')}
-            className={`px-6 py-3 rounded-full font-['Raleway'] font-bold transition-all ${
+            className={`px-8 py-4 rounded-full font-['Raleway'] font-bold text-lg transition-all border-2 ${
               role === 'partner'
-                ? 'bg-[#1E9BF0] text-white shadow-lg'
-                : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                ? 'bg-[#1E9BF0] text-white shadow-lg border-[#1E9BF0]'
+                : 'bg-white text-gray-900 border-gray-300 hover:border-[#1E9BF0]'
             }`}
           >
             Партнер
