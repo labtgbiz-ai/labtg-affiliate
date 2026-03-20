@@ -56,7 +56,7 @@ export default function HeroSection() {
 
             {/* Sub */}
             <p ref={subRef} className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg">
-              Рекомендуйте лучший маркетинговый продюсерский центр Telegram и получайте{' '}
+              Рекомендуйте LabTG и получайте{' '}
               <strong className="text-gray-900">7% с каждой продажи</strong> + пожизненные выплаты на втором этапе.
             </p>
 

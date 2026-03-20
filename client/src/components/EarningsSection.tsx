@@ -138,7 +138,7 @@ export default function EarningsSection() {
               </div>
 
               {/* Network visual */}
-              <div className="mt-6 rounded-2xl overflow-hidden bg-gray-950 flex items-center gap-6 p-4 md:p-6">
+              <div className="mt-6 rounded-2xl overflow-hidden bg-gray-950 flex items-center gap-6 p-4 md:p-6" style={{borderRadius: '17px'}}>
                 <img
                   src={NETWORK_IMG}
                   alt="Партнёрская сеть"
