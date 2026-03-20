@@ -1,6 +1,6 @@
-/* LabTG Affiliate — Income Calculator Section
-   Design: Gradient mesh bg, glass card calculator, animated number output
-   Logic: Stage 1 (7% of sale + 1% ad budget) + Stage 2 (7% ad budget lifetime)
+/*
+   CalculatorSection: Interactive income calculator with new partner program structure
+   Logic: Agent and Partner roles with different percentages for Stage 1 and Stage 2
 */
 import { useState, useEffect, useRef } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
@@ -52,6 +52,7 @@ export default function CalculatorSection() {
   const calcRef = useScrollReveal(0.05);
 
   // Inputs
+  const [role, setRole] = useState<'agent' | 'partner'>('partner');
   const [personalLeads, setPersonalLeads] = useState(50);
   const [subPartnerLeads, setSubPartnerLeads] = useState(30);
   const [adBudgetPerLead, setAdBudgetPerLead] = useState(150000);
@@ -61,19 +62,40 @@ export default function CalculatorSection() {
   const personalSales = Math.round(personalLeads * CONVERSION);
   const subPartnerSales = Math.round(subPartnerLeads * CONVERSION);
 
-  // Stage 1
-  const stage1Personal = personalSales * AVG_CHECK * 0.07;
-  const stage1SubPartner = subPartnerSales * AVG_CHECK * 0.04;
-  const stage1AdPersonal = personalLeads * adBudgetPerLead * 0.01;
-  const stage1AdSubPartner = subPartnerLeads * adBudgetPerLead * 0.01;
-  const stage1Total = stage1Personal + stage1SubPartner + stage1AdPersonal + stage1AdSubPartner;
+  let total = 0;
 
-  // Stage 2 (monthly, from ad budget)
-  const stage2Personal = personalLeads * adBudgetPerLead * 0.07;
-  const stage2SubPartner = subPartnerLeads * adBudgetPerLead * 0.03;
-  const stage2Total = stage2Personal + stage2SubPartner;
-
-  const total = stage === '1' ? stage1Total : stage2Total;
+  if (role === 'agent') {
+    if (stage === '1') {
+      // Agent Stage 1: 11% from service + 1.1% from ad budget
+      const agentServiceIncome = personalSales * AVG_CHECK * 0.11;
+      const agentAdIncome = personalLeads * adBudgetPerLead * 0.011;
+      total = agentServiceIncome + agentAdIncome;
+    } else {
+      // Agent Stage 2: 11% from service + 1.1% from ad budget + 11% from subscribers + 11% from leads
+      const agentServiceIncome = personalSales * AVG_CHECK * 0.11;
+      const agentAdIncome = personalLeads * adBudgetPerLead * 0.011;
+      const agentSubscriberIncome = personalLeads * adBudgetPerLead * 0.11;
+      const agentLeadIncome = personalSales * AVG_CHECK * 0.11;
+      total = agentServiceIncome + agentAdIncome + agentSubscriberIncome + agentLeadIncome;
+    }
+  } else {
+    // Partner role
+    if (stage === '1') {
+      // Partner Stage 1: 7% + 0.7% from personal + 4% + 0.4% from sub-partner
+      const partnerPersonalService = personalSales * AVG_CHECK * 0.07;
+      const partnerPersonalAd = personalLeads * adBudgetPerLead * 0.007;
+      const partnerSubPartnerService = subPartnerSales * AVG_CHECK * 0.04;
+      const partnerSubPartnerAd = subPartnerLeads * adBudgetPerLead * 0.004;
+      total = partnerPersonalService + partnerPersonalAd + partnerSubPartnerService + partnerSubPartnerAd;
+    } else {
+      // Partner Stage 2: 7% from subscribers + 7% from leads (personal) + 4% from subscribers + 4% from leads (sub-partner)
+      const partnerPersonalSubscribers = personalLeads * adBudgetPerLead * 0.07;
+      const partnerPersonalLeads = personalSales * AVG_CHECK * 0.07;
+      const partnerSubPartnerSubscribers = subPartnerLeads * adBudgetPerLead * 0.04;
+      const partnerSubPartnerLeads = subPartnerSales * AVG_CHECK * 0.04;
+      total = partnerPersonalSubscribers + partnerPersonalLeads + partnerSubPartnerSubscribers + partnerSubPartnerLeads;
+    }
+  }
 
   const updateSlider = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target;
@@ -99,221 +121,161 @@ export default function CalculatorSection() {
 
       <div className="container relative z-10">
         {/* Title */}
-        <div ref={titleRef as any} className="reveal text-center mb-14">
-          <span className="pill-badge pill-badge-blue mb-4 inline-flex">Калькулятор дохода</span>
+        <div ref={titleRef as any} className="reveal text-center mb-12">
+          <span className="pill-badge pill-badge-light mb-4 inline-flex">Калькулятор дохода</span>
           <h2 className="font-['Raleway'] font-black text-3xl md:text-5xl text-gray-900 mt-3">
             Посчитайте свой доход
           </h2>
-          <p className="text-gray-500 text-lg mt-4 max-w-xl mx-auto">
+          <p className="text-gray-500 text-lg mt-4 max-w-2xl mx-auto">
             Настройте параметры и увидите, сколько вы можете заработать с партнёрской программой LabTG
           </p>
         </div>
 
-        <div ref={calcRef as any} className="reveal max-w-5xl mx-auto">
-          <div className="glass-card rounded-3xl overflow-hidden shadow-2xl border border-white/80">
-            {/* Stage toggle */}
-            <div className="bg-gray-50 border-b border-gray-100 p-3 md:p-6">
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
-                <span className="text-xs sm:text-sm text-gray-500 font-medium">Этап:</span>
-                <div className="flex bg-white rounded-xl p-1 shadow-sm border border-gray-100">
-                  <button
-                    onClick={() => setStage('1')}
-                    className={`px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
-                      stage === '1'
-                        ? 'bg-[#1E9BF0] text-white shadow-md'
-                        : 'text-gray-500 hover:text-gray-700'
-                    }`}
-                  >
-                    Этап 1
-                  </button>
-                  <button
-                    onClick={() => setStage('2')}
-                    className={`px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
-                      stage === '2'
-                        ? 'bg-gray-900 text-white shadow-md'
-                        : 'text-gray-500 hover:text-gray-700'
-                    }`}
-                  >
-                    Этап 2
-                  </button>
+        {/* Calculator */}
+        <div ref={calcRef as any} className="reveal max-w-3xl mx-auto">
+          <div className="glass-card rounded-3xl p-6 md:p-10 backdrop-blur-xl border border-white/20 shadow-2xl">
+            {/* Role Tabs */}
+            <div className="flex gap-3 mb-8">
+              <button
+                onClick={() => setRole('agent')}
+                className={`flex-1 px-4 py-3 rounded-xl font-['Raleway'] font-bold transition-all ${
+                  role === 'agent'
+                    ? 'bg-[#1E9BF0] text-white shadow-lg'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Агент
+              </button>
+              <button
+                onClick={() => setRole('partner')}
+                className={`flex-1 px-4 py-3 rounded-xl font-['Raleway'] font-bold transition-all ${
+                  role === 'partner'
+                    ? 'bg-[#1E9BF0] text-white shadow-lg'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Партнер
+              </button>
+            </div>
+
+            {/* Stage Tabs */}
+            <div className="flex gap-3 mb-8">
+              <button
+                onClick={() => setStage('1')}
+                className={`flex-1 px-4 py-3 rounded-xl font-['Raleway'] font-bold transition-all ${
+                  stage === '1'
+                    ? 'bg-[#1E9BF0] text-white shadow-lg'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Этап 1
+              </button>
+              <button
+                onClick={() => setStage('2')}
+                className={`flex-1 px-4 py-3 rounded-xl font-['Raleway'] font-bold transition-all ${
+                  stage === '2'
+                    ? 'bg-[#1E9BF0] text-white shadow-lg'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Этап 2
+              </button>
+            </div>
+
+            {/* Sliders */}
+            <div className="space-y-6 mb-8">
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="font-['Raleway'] font-bold text-gray-900">Лично лидов</label>
+                  <span className="text-[#1E9BF0] font-bold">{personalLeads}</span>
+                </div>
+                <input
+                  type="range"
+                  min="1"
+                  max="200"
+                  value={personalLeads}
+                  onChange={handleSlider(setPersonalLeads)}
+                  className="slider w-full"
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>1</span>
+                  <span>100</span>
+                  <span>200</span>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="font-['Raleway'] font-bold text-gray-900">От партнёра</label>
+                  <span className="text-[#1E9BF0] font-bold">{subPartnerLeads}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="200"
+                  value={subPartnerLeads}
+                  onChange={handleSlider(setSubPartnerLeads)}
+                  className="slider w-full"
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>0</span>
+                  <span>100</span>
+                  <span>200</span>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="font-['Raleway'] font-bold text-gray-900">Рекл. бюджет</label>
+                  <span className="text-[#1E9BF0] font-bold">{formatRub(adBudgetPerLead)}</span>
+                </div>
+                <input
+                  type="range"
+                  min="150000"
+                  max="5000000"
+                  step="50000"
+                  value={adBudgetPerLead}
+                  onChange={handleSlider(setAdBudgetPerLead)}
+                  className="slider w-full"
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>150К</span>
+                  <span>2.5М</span>
+                  <span>5М</span>
                 </div>
               </div>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-0">
-              {/* Left: Sliders */}
-              <div className="p-3 md:p-8 border-r border-gray-100 overflow-x-hidden">
-                <h3 className="font-['Raleway'] font-bold text-gray-900 text-base sm:text-lg mb-4">Параметры</h3>
-
-                <div className="space-y-5">
-                  {/* Personal leads */}
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <label className="text-xs sm:text-sm font-semibold text-gray-700">
-                        Лично лидов
-                      </label>
-                      <span className="font-['Raleway'] font-black text-lg sm:text-xl text-[#1E9BF0]">{personalLeads}</span>
-                    </div>
-                    <input
-                      type="range"
-                      min="1"
-                      max="200"
-                      value={personalLeads}
-                      onChange={handleSlider(setPersonalLeads)}
-                      style={{ '--value': `${((personalLeads - 1) / 199) * 100}%` } as any}
-                    />
-                    <div className="flex justify-between text-xs text-gray-400 mt-1">
-                      <span>1</span>
-                      <span>100</span>
-                      <span>200</span>
-                    </div>
-                  </div>
-
-                  {/* Sub-partner leads */}
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <label className="text-xs sm:text-sm font-semibold text-gray-700">
-                        От партнёра
-                      </label>
-                      <span className="font-['Raleway'] font-black text-lg sm:text-xl text-[#1E9BF0]">{subPartnerLeads}</span>
-                    </div>
-                    <input
-                      type="range"
-                      min="0"
-                      max="200"
-                      value={subPartnerLeads}
-                      onChange={handleSlider(setSubPartnerLeads)}
-                      style={{ '--value': `${(subPartnerLeads / 200) * 100}%` } as any}
-                    />
-                    <div className="flex justify-between text-xs text-gray-400 mt-1">
-                      <span>0</span>
-                      <span>100</span>
-                      <span>200</span>
-                    </div>
-                  </div>
-
-                  {/* Ad budget */}
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <label className="text-xs sm:text-sm font-semibold text-gray-700">
-                        Рекл. бюджет
-                      </label>
-                      <span className="font-['Raleway'] font-black text-lg sm:text-xl text-[#1E9BF0]">
-                        {(adBudgetPerLead / 1000).toFixed(0)}К ₽
-                      </span>
-                    </div>
-                    <input
-                      type="range"
-                      min="150000"
-                      max="5000000"
-                      step="5000"
-                      value={adBudgetPerLead}
-                      onChange={handleSlider(setAdBudgetPerLead)}
-                      style={{ '--value': `${((adBudgetPerLead - 10000) / 290000) * 100}%` } as any}
-                    />
-                    <div className="flex justify-between text-xs text-gray-500 mt-2">
-                      <span>150К</span>
-                      <span>2.5М</span>
-                      <span>5М</span>
-                    </div>
-                  </div>
+            {/* Fixed params */}
+            <div className="bg-gray-50 rounded-2xl p-4 mb-8">
+              <div className="text-sm text-gray-600 font-semibold mb-3">Фиксированные параметры LabTG:</div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <div className="text-xs text-gray-500">Средний чек</div>
+                  <div className="font-['Raleway'] font-bold text-lg text-gray-900">800 000 ₽</div>
                 </div>
-
-                {/* Fixed params note */}
-                <div className="mt-6 bg-blue-50 rounded-xl p-4 border border-blue-100">
-                  <div className="text-xs text-gray-500 font-medium mb-2">Фиксированные параметры LabTG:</div>
-                  <div className="flex flex-wrap gap-3">
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-2 h-2 rounded-full bg-[#1E9BF0]" />
-                      <span className="text-xs text-gray-600">Средний чек: <strong>800 000 ₽</strong></span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-2 h-2 rounded-full bg-[#1E9BF0]" />
-                      <span className="text-xs text-gray-600">Конверсия в продажу: <strong>20%</strong></span>
-                    </div>
-                  </div>
+                <div>
+                  <div className="text-xs text-gray-500">Конверсия в продажу</div>
+                  <div className="font-['Raleway'] font-bold text-lg text-gray-900">20%</div>
                 </div>
-              </div>
-
-              {/* Right: Results */}
-              <div className="p-3 md:p-8 bg-gradient-to-br from-gray-50 to-blue-50/30 overflow-x-hidden">
-                <h3 className="font-['Raleway'] font-bold text-gray-900 text-base sm:text-lg mb-4">Ваш доход</h3>
-
-                {stage === '1' ? (
-                  <div className="space-y-3">
-                    <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-blue-50">
-                      <div className="text-[10px] sm:text-xs text-gray-500 mb-1">7% с личных ({personalSales})</div>
-                      <div className="font-['Raleway'] font-black text-lg sm:text-2xl text-gray-900">
-                        <AnimatedNumber value={stage1Personal} duration={400} />
-                      </div>
-                    </div>
-
-                    <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-blue-50">
-                      <div className="text-[10px] sm:text-xs text-gray-500 mb-1">4% с партнёра ({subPartnerSales})</div>
-                      <div className="font-['Raleway'] font-black text-lg sm:text-2xl text-gray-900">
-                        <AnimatedNumber value={stage1SubPartner} duration={400} />
-                      </div>
-                    </div>
-
-                    <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-blue-50">
-                      <div className="text-[10px] sm:text-xs text-gray-500 mb-1">1% рекл. личных</div>
-                      <div className="font-['Raleway'] font-black text-lg sm:text-2xl text-gray-900">
-                        <AnimatedNumber value={stage1AdPersonal} duration={400} />
-                      </div>
-                    </div>
-
-                    <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-blue-50">
-                      <div className="text-[10px] sm:text-xs text-gray-500 mb-1">1% рекл. партнёра</div>
-                      <div className="font-['Raleway'] font-black text-lg sm:text-2xl text-gray-900">
-                        <AnimatedNumber value={stage1AdSubPartner} duration={400} />
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-blue-50">
-                      <div className="text-[10px] sm:text-xs text-gray-500 mb-1">7% рекл. личных (мес.)</div>
-                      <div className="font-['Raleway'] font-black text-lg sm:text-2xl text-gray-900">
-                        <AnimatedNumber value={stage2Personal} duration={400} />
-                      </div>
-                    </div>
-
-                    <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-blue-50">
-                      <div className="text-[10px] sm:text-xs text-gray-500 mb-1">3% рекл. партнёра (мес.)</div>
-                      <div className="font-['Raleway'] font-black text-lg sm:text-2xl text-gray-900">
-                        <AnimatedNumber value={stage2SubPartner} duration={400} />
-                      </div>
-                    </div>
-
-                    <div className="mt-2 bg-yellow-50 rounded-xl p-2 sm:p-3 border border-yellow-100">
-                      <div className="text-[10px] sm:text-xs text-yellow-700 font-medium">
-                        Пожизненные выплаты
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Total */}
-                <div className="mt-4 brand-card p-4 sm:p-5 text-center">
-                  <div className="text-white/80 text-xs sm:text-sm mb-1">
-                    {stage === '1' ? 'Итого' : 'В месяц'}
-                  </div>
-                  <div className="font-['Raleway'] font-black text-2xl sm:text-4xl md:text-5xl text-white">
-                    <AnimatedNumber value={total} duration={400} />
-                  </div>
-                  {stage === '2' && (
-                    <div className="text-white/70 text-[10px] sm:text-xs mt-1">пожизненно</div>
-                  )}
-                </div>
-
-                <a
-                  href="#contact"
-                  className="btn-gradient w-full text-center block mt-3 text-xs sm:text-base py-3 sm:py-4"
-                >
-                  Хочу столько →
-                </a>
               </div>
             </div>
+
+            {/* Results */}
+            <div className="bg-gradient-to-br from-[#1E9BF0]/10 to-[#D4D4FF]/10 rounded-2xl p-6 border border-[#1E9BF0]/20">
+              <div className="text-sm text-gray-600 font-semibold mb-2">Ваш доход</div>
+              <div className="font-['Raleway'] font-black text-4xl md:text-5xl text-[#1E9BF0] mb-1">
+                <AnimatedNumber value={total} />
+              </div>
+              <div className="text-xs text-gray-500">
+                {stage === '1' ? 'за первый договор' : 'в месяц (постоплата)'}
+              </div>
+            </div>
+
+            {/* CTA */}
+            <button className="w-full mt-8 bg-[#1E9BF0] hover:bg-[#1a7fb8] text-white font-['Raleway'] font-bold py-4 rounded-xl transition-all shadow-lg hover:shadow-xl">
+              Хочу столько →
+            </button>
           </div>
         </div>
       </div>
