@@ -113,12 +113,10 @@ export default function EarningsSection() {
                 <div className="bg-gradient-to-r from-[#1E9BF0] to-[#0d7fd8] p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-2">
                     <span className="bg-white/30 text-white text-sm font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-white/50">Этап 2</span>
-                    <h3 className="font-['Raleway'] font-black text-2xl md:text-3xl text-white">
-                      Текущий клиент
-                    </h3>
+                    <h3 className="font['Raleway'] font-black text-2xl md:text-3xl text-white" style={{textShadow: '0 2px 4px rgba(0,0,0,0.2)'}}>Постоплата</h3>
                   </div>
                   <p className="text-white/90 text-sm md:text-base">
-                    Масштабирование бизнеса клиента
+                    Пассивный доход от подписчиков и лидов
                   </p>
                 </div>
 
@@ -129,35 +127,7 @@ export default function EarningsSection() {
                   </p>
 
                   <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="bg-gradient-to-br from-[#1E9BF0]/10 to-[#D4D4FF]/10 rounded-2xl p-5 border border-[#1E9BF0]/20">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
-                          <div className="text-gray-600 text-sm font-semibold mb-1">От стоимости услуги</div>
-                          <div className="font-['Raleway'] font-black text-4xl text-[#1E9BF0]">11%</div>
-                        </div>
-                        <div className="w-10 h-10 rounded-xl bg-[#1E9BF0]/20 flex items-center justify-center flex-shrink-0">
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="#1E9BF0">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="text-gray-500 text-xs font-medium">Предоплата</div>
-                    </div>
 
-                    <div className="bg-gradient-to-br from-[#1E9BF0]/10 to-[#D4D4FF]/10 rounded-2xl p-5 border border-[#1E9BF0]/20">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
-                          <div className="text-gray-600 text-sm font-semibold mb-1">От рекламного бюджета</div>
-                          <div className="font-['Raleway'] font-black text-4xl text-[#1E9BF0]">1.1%</div>
-                        </div>
-                        <div className="w-10 h-10 rounded-xl bg-[#1E9BF0]/20 flex items-center justify-center flex-shrink-0">
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="#1E9BF0">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="text-gray-500 text-xs font-medium">Предоплата</div>
-                    </div>
 
                     <div className="bg-gradient-to-br from-[#1E9BF0]/10 to-[#D4D4FF]/10 rounded-2xl p-5 border border-[#1E9BF0]/20">
                       <div className="flex items-start justify-between mb-3">
