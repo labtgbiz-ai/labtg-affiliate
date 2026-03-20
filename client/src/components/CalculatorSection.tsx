@@ -98,7 +98,7 @@ export default function CalculatorSection() {
     <section id="calculator" className="py-20 md:py-28 relative overflow-hidden">
       {/* BG */}
       <div className="absolute inset-0">
-        <img src={CALC_BG} alt="" className="w-full h-full object-cover" />
+        <img src={CALC_BG} alt="Калькулятор дохода партнёрской программы LabTG" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-white/85" />
       </div>
 
