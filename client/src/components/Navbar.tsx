@@ -32,13 +32,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-[#1E9BF0] flex items-center justify-center shadow-md group-hover:shadow-blue-300 transition-shadow">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2L3 7L12 12L21 7L12 2Z" fill="white" opacity="0.9"/>
-                <path d="M3 12L12 17L21 12" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-                <path d="M3 17L12 22L21 17" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.6"/>
-              </svg>
-            </div>
+            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663458361072/CLC9CvFw6EzBzRUxKGTfc6/логотип_1_a8a68d00.png" alt="LabTG" className="h-10 w-auto" />
             <div>
               <span className="font-['Raleway'] font-900 text-xl text-gray-900 tracking-tight">LabTG</span>
               <span className="hidden sm:block text-[10px] text-gray-400 font-medium leading-none -mt-0.5">Партнёрская программа</span>
