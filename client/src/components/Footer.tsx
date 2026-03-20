@@ -9,14 +9,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-[#1E9BF0] flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2L3 7L12 12L21 7L12 2Z" fill="white" opacity="0.9"/>
-                  <path d="M3 12L12 17L21 12" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-                  <path d="M3 17L12 22L21 17" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.6"/>
-                </svg>
-              </div>
-              <span className="font-['Raleway'] font-900 text-xl tracking-tight text-gray-900">LabTG</span>
+              <img src="https://cdn.manus.im/webdev/labtg-logo.png" alt="LabTG" className="h-10 w-auto" />
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
               Продюсерский центр полного цикла. Маркетинг «под ключ», AI-агенты и целевые лиды в Telegram.
