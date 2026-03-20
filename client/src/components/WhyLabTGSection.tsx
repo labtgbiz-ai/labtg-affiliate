@@ -4,14 +4,7 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { useCountUp } from '@/hooks/useScrollReveal';
 
-const services = [
-  { icon: '📊', title: 'Unit-экономика и стратегия', desc: 'Считаем стоимость лида и клиента до запуска' },
-  { icon: '📦', title: 'Упаковка и презентация', desc: 'Продающий профиль, канал и чат-бот' },
-  { icon: '🤖', title: 'AI-автоматизация', desc: 'ChatGPT 5.2 агент работает 24/7 за вас' },
-  { icon: '🎯', title: 'Привлечение лидов', desc: '11 методов: Telegram Ads, посевы, нейрокомментинг' },
-  { icon: '📝', title: 'Контент и вовлечение', desc: 'AI-видеоролики, контент-стратегия, медиа' },
-  { icon: '🚀', title: 'Масштабирование', desc: 'Постоплата + инвестиции в рекламный бюджет' },
-];
+
 
 function StatItem({ end, suffix, label }: { end: number; suffix: string; label: string }) {
   const ref = useCountUp(end, 2000);
@@ -30,7 +23,7 @@ export default function WhyLabTGSection() {
   const titleRef = useScrollReveal();
   const statsRef = useScrollReveal(0.1);
   const featureRef = useScrollReveal(0.1);
-  const servicesRef = useScrollReveal(0.05);
+
 
   return (
     <section id="about" className="py-20 md:py-28 bg-[#F7F9FC] relative overflow-hidden">
@@ -95,27 +88,7 @@ export default function WhyLabTGSection() {
           </div>
         </div>
 
-        {/* Services grid */}
-        <div ref={servicesRef as any} className="reveal">
-          <h3 className="font-['Raleway'] font-bold text-2xl text-gray-900 mb-6 text-center">
-            6 направлений работы с клиентами
-          </h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {services.map((s, i) => (
-              <div
-                key={s.title}
-                className="card-hover glass-card rounded-2xl p-5 flex items-start gap-4"
-                style={{ transitionDelay: `${i * 0.05}s` }}
-              >
-                <div className="text-3xl flex-shrink-0">{s.icon}</div>
-                <div>
-                  <h4 className="font-['Raleway'] font-bold text-gray-900 text-sm mb-1">{s.title}</h4>
-                  <p className="text-gray-500 text-xs leading-relaxed">{s.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+
       </div>
     </section>
   );

@@ -54,7 +54,7 @@ export default function CalculatorSection() {
   // Inputs
   const [personalLeads, setPersonalLeads] = useState(50);
   const [subPartnerLeads, setSubPartnerLeads] = useState(30);
-  const [adBudgetPerLead, setAdBudgetPerLead] = useState(50000);
+  const [adBudgetPerLead, setAdBudgetPerLead] = useState(150000);
   const [stage, setStage] = useState<'1' | '2'>('1');
 
   // Calculations
@@ -204,17 +204,17 @@ export default function CalculatorSection() {
                     </div>
                     <input
                       type="range"
-                      min="10000"
-                      max="300000"
+                      min="150000"
+                      max="5000000"
                       step="5000"
                       value={adBudgetPerLead}
                       onChange={handleSlider(setAdBudgetPerLead)}
                       style={{ '--value': `${((adBudgetPerLead - 10000) / 290000) * 100}%` } as any}
                     />
-                    <div className="flex justify-between text-xs text-gray-400 mt-1">
-                      <span>10К</span>
+                    <div className="flex justify-between text-xs text-gray-500 mt-2">
                       <span>150К</span>
-                      <span>300К</span>
+                      <span>2.5М</span>
+                      <span>5М</span>
                     </div>
                   </div>
                 </div>

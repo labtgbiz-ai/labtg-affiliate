@@ -157,57 +157,63 @@ export default function EarningsSection() {
 
         {/* Stage 2 */}
         <div ref={stage2Ref as any} className="reveal">
-          <div className="rounded-3xl overflow-hidden shadow-2xl relative bg-gradient-to-br from-[#1E9BF0] via-[#0d7fd8] to-[#0a5ba8]">
-            {/* BG image - subtle overlay */}
-            <div className="absolute inset-0 opacity-20">
-              <img src={STAGE2_BG} alt="" className="w-full h-full object-cover" />
-            </div>
-
-            <div className="relative z-10 p-6 md:p-10">
-              <div className="flex items-center gap-3 mb-6">
+          <div className="rounded-3xl overflow-hidden shadow-2xl bg-white border border-gray-100">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-[#1E9BF0] to-[#0d7fd8] p-6 md:p-8">
+              <div className="flex items-center gap-3 mb-2">
                 <span className="bg-white/30 text-white text-sm font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-white/50">Этап 2</span>
-                <h3 className="font-['Raleway'] font-black text-2xl md:text-4xl text-white">
+                <h3 className="font-['Raleway'] font-black text-2xl md:text-3xl text-white">
                   Пожизненные выплаты
                 </h3>
               </div>
+              <p className="text-white/90 text-sm md:text-base">
+                Постоплата = пассивный доход
+              </p>
+            </div>
 
-              <p className="text-white/95 text-base md:text-lg mb-8 max-w-2xl leading-relaxed">
-                Когда проект переходит на <strong>постоплату</strong> (LabTG инвестирует в рекламный бюджет клиента), вы начинаете получать процент с рекламного бюджета — <strong className="text-yellow-300">пожизненно</strong>.
+            {/* Content */}
+            <div className="p-6 md:p-8">
+              <p className="text-gray-600 text-base mb-6 leading-relaxed">
+                Когда проект переходит на <strong>постоплату</strong> (LabTG инвестирует в рекламный бюджет клиента), вы начинаете получать процент с рекламного бюджета — <strong className="text-[#1E9BF0]">пожизненно</strong>.
               </p>
 
-              <div className="grid sm:grid-cols-2 gap-4 max-w-2xl">
-                <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 border border-white/40 shadow-lg">
-                  <div className="text-white/90 text-sm font-semibold mb-2">Лично привлечённые лиды</div>
-                  <div className="font-['Raleway'] font-black text-6xl text-white mb-2">7%</div>
-                  <div className="text-white/80 text-base font-medium mb-3">с рекламного бюджета</div>
-                  <div className="flex items-center gap-2 bg-white/10 rounded-xl px-3 py-2">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-yellow-300 flex-shrink-0">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                    <span className="text-white/90 text-xs font-semibold">Пожизненно</span>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="bg-gradient-to-br from-[#1E9BF0]/10 to-[#D4D4FF]/10 rounded-2xl p-5 border border-[#1E9BF0]/20">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <div className="text-gray-600 text-sm font-semibold mb-1">Лично привлечённые лиды</div>
+                      <div className="font-['Raleway'] font-black text-4xl text-[#1E9BF0]">7%</div>
+                    </div>
+                    <div className="w-10 h-10 rounded-xl bg-[#1E9BF0]/20 flex items-center justify-center flex-shrink-0">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="#1E9BF0">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                    </div>
                   </div>
+                  <div className="text-gray-500 text-xs font-medium">с рекламного бюджета · пожизненно</div>
                 </div>
 
-                <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 border border-white/40 shadow-lg">
-                  <div className="text-white/90 text-sm font-semibold mb-2">Лиды вашего партнёра</div>
-                  <div className="font-['Raleway'] font-black text-6xl text-white mb-2">3%</div>
-                  <div className="text-white/80 text-base font-medium mb-3">с рекламного бюджета</div>
-                  <div className="flex items-center gap-2 bg-white/10 rounded-xl px-3 py-2">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-yellow-300 flex-shrink-0">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                    <span className="text-white/90 text-xs font-semibold">Пожизненно</span>
+                <div className="bg-gradient-to-br from-[#1E9BF0]/10 to-[#D4D4FF]/10 rounded-2xl p-5 border border-[#1E9BF0]/20">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <div className="text-gray-600 text-sm font-semibold mb-1">Лиды вашего партнёра</div>
+                      <div className="font-['Raleway'] font-black text-4xl text-[#1E9BF0]">3%</div>
+                    </div>
+                    <div className="w-10 h-10 rounded-xl bg-[#1E9BF0]/20 flex items-center justify-center flex-shrink-0">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="#1E9BF0">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                    </div>
                   </div>
+                  <div className="text-gray-500 text-xs font-medium">с рекламного бюджета · пожизненно</div>
                 </div>
               </div>
 
-              <div className="mt-6 inline-flex items-center gap-2 bg-white/20 border border-white/40 rounded-xl px-4 py-3 backdrop-blur-sm">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
+              <div className="mt-5 flex items-center gap-2 text-[#1E9BF0] text-sm font-semibold">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                 </svg>
-                <span className="text-white font-semibold text-sm">
-                  Выплаты продолжаются, пока клиент работает с LabTG
-                </span>
+                <span>Выплаты продолжаются, пока клиент работает с LabTG</span>
               </div>
             </div>
           </div>
