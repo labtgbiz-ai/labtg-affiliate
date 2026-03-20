@@ -112,29 +112,29 @@ export default function CalculatorSection() {
         <div ref={calcRef as any} className="reveal max-w-5xl mx-auto">
           <div className="glass-card rounded-3xl overflow-hidden shadow-2xl border border-white/80">
             {/* Stage toggle */}
-            <div className="bg-gray-50 border-b border-gray-100 p-4 md:p-6">
-              <div className="flex items-center justify-center gap-2">
-                <span className="text-sm text-gray-500 font-medium">Этап работы:</span>
+            <div className="bg-gray-50 border-b border-gray-100 p-3 md:p-6">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
+                <span className="text-xs sm:text-sm text-gray-500 font-medium">Этап:</span>
                 <div className="flex bg-white rounded-xl p-1 shadow-sm border border-gray-100">
                   <button
                     onClick={() => setStage('1')}
-                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                    className={`px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
                       stage === '1'
                         ? 'bg-[#1E9BF0] text-white shadow-md'
                         : 'text-gray-500 hover:text-gray-700'
                     }`}
                   >
-                    Этап 1 — Коммерческий
+                    Этап 1
                   </button>
                   <button
                     onClick={() => setStage('2')}
-                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                    className={`px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
                       stage === '2'
                         ? 'bg-gray-900 text-white shadow-md'
                         : 'text-gray-500 hover:text-gray-700'
                     }`}
                   >
-                    Этап 2 — Постоплата
+                    Этап 2
                   </button>
                 </div>
               </div>
@@ -142,17 +142,17 @@ export default function CalculatorSection() {
 
             <div className="grid lg:grid-cols-2 gap-0">
               {/* Left: Sliders */}
-              <div className="p-6 md:p-8 border-r border-gray-100">
-                <h3 className="font-['Raleway'] font-bold text-gray-900 text-lg mb-6">Параметры</h3>
+              <div className="p-3 md:p-8 border-r border-gray-100 overflow-x-hidden">
+                <h3 className="font-['Raleway'] font-bold text-gray-900 text-base sm:text-lg mb-4">Параметры</h3>
 
-                <div className="space-y-8">
+                <div className="space-y-5">
                   {/* Personal leads */}
                   <div>
-                    <div className="flex justify-between items-center mb-3">
-                      <label className="text-sm font-semibold text-gray-700">
-                        Лично привлечённых лидов
+                    <div className="flex justify-between items-center mb-2">
+                      <label className="text-xs sm:text-sm font-semibold text-gray-700">
+                        Лично лидов
                       </label>
-                      <span className="font-['Raleway'] font-black text-xl text-[#1E9BF0]">{personalLeads}</span>
+                      <span className="font-['Raleway'] font-black text-lg sm:text-xl text-[#1E9BF0]">{personalLeads}</span>
                     </div>
                     <input
                       type="range"
@@ -171,11 +171,11 @@ export default function CalculatorSection() {
 
                   {/* Sub-partner leads */}
                   <div>
-                    <div className="flex justify-between items-center mb-3">
-                      <label className="text-sm font-semibold text-gray-700">
-                        Лидов от вашего партнёра
+                    <div className="flex justify-between items-center mb-2">
+                      <label className="text-xs sm:text-sm font-semibold text-gray-700">
+                        От партнёра
                       </label>
-                      <span className="font-['Raleway'] font-black text-xl text-[#1E9BF0]">{subPartnerLeads}</span>
+                      <span className="font-['Raleway'] font-black text-lg sm:text-xl text-[#1E9BF0]">{subPartnerLeads}</span>
                     </div>
                     <input
                       type="range"
@@ -194,12 +194,12 @@ export default function CalculatorSection() {
 
                   {/* Ad budget */}
                   <div>
-                    <div className="flex justify-between items-center mb-3">
-                      <label className="text-sm font-semibold text-gray-700">
-                        Рекл. бюджет на лида
+                    <div className="flex justify-between items-center mb-2">
+                      <label className="text-xs sm:text-sm font-semibold text-gray-700">
+                        Рекл. бюджет
                       </label>
-                      <span className="font-['Raleway'] font-black text-xl text-[#1E9BF0]">
-                        {adBudgetPerLead.toLocaleString('ru-RU')} ₽
+                      <span className="font-['Raleway'] font-black text-lg sm:text-xl text-[#1E9BF0]">
+                        {(adBudgetPerLead / 1000).toFixed(0)}К ₽
                       </span>
                     </div>
                     <input
@@ -236,81 +236,81 @@ export default function CalculatorSection() {
               </div>
 
               {/* Right: Results */}
-              <div className="p-6 md:p-8 bg-gradient-to-br from-gray-50 to-blue-50/30">
-                <h3 className="font-['Raleway'] font-bold text-gray-900 text-lg mb-6">Ваш доход</h3>
+              <div className="p-3 md:p-8 bg-gradient-to-br from-gray-50 to-blue-50/30 overflow-x-hidden">
+                <h3 className="font-['Raleway'] font-bold text-gray-900 text-base sm:text-lg mb-4">Ваш доход</h3>
 
                 {stage === '1' ? (
-                  <div className="space-y-4">
-                    <div className="bg-white rounded-2xl p-4 shadow-sm border border-blue-50">
-                      <div className="text-xs text-gray-500 mb-1">7% с личных продаж ({personalSales} сделок)</div>
-                      <div className="font-['Raleway'] font-black text-2xl text-gray-900">
-                        <AnimatedNumber value={stage1Personal} />
+                  <div className="space-y-3">
+                    <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-blue-50">
+                      <div className="text-[10px] sm:text-xs text-gray-500 mb-1">7% с личных ({personalSales})</div>
+                      <div className="font-['Raleway'] font-black text-lg sm:text-2xl text-gray-900">
+                        <AnimatedNumber value={stage1Personal} duration={400} />
                       </div>
                     </div>
 
-                    <div className="bg-white rounded-2xl p-4 shadow-sm border border-blue-50">
-                      <div className="text-xs text-gray-500 mb-1">4% с продаж партнёра ({subPartnerSales} сделок)</div>
-                      <div className="font-['Raleway'] font-black text-2xl text-gray-900">
-                        <AnimatedNumber value={stage1SubPartner} />
+                    <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-blue-50">
+                      <div className="text-[10px] sm:text-xs text-gray-500 mb-1">4% с партнёра ({subPartnerSales})</div>
+                      <div className="font-['Raleway'] font-black text-lg sm:text-2xl text-gray-900">
+                        <AnimatedNumber value={stage1SubPartner} duration={400} />
                       </div>
                     </div>
 
-                    <div className="bg-white rounded-2xl p-4 shadow-sm border border-blue-50">
-                      <div className="text-xs text-gray-500 mb-1">1% с рекл. бюджета личных лидов</div>
-                      <div className="font-['Raleway'] font-black text-2xl text-gray-900">
-                        <AnimatedNumber value={stage1AdPersonal} />
+                    <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-blue-50">
+                      <div className="text-[10px] sm:text-xs text-gray-500 mb-1">1% рекл. личных</div>
+                      <div className="font-['Raleway'] font-black text-lg sm:text-2xl text-gray-900">
+                        <AnimatedNumber value={stage1AdPersonal} duration={400} />
                       </div>
                     </div>
 
-                    <div className="bg-white rounded-2xl p-4 shadow-sm border border-blue-50">
-                      <div className="text-xs text-gray-500 mb-1">1% с рекл. бюджета лидов партнёра</div>
-                      <div className="font-['Raleway'] font-black text-2xl text-gray-900">
-                        <AnimatedNumber value={stage1AdSubPartner} />
+                    <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-blue-50">
+                      <div className="text-[10px] sm:text-xs text-gray-500 mb-1">1% рекл. партнёра</div>
+                      <div className="font-['Raleway'] font-black text-lg sm:text-2xl text-gray-900">
+                        <AnimatedNumber value={stage1AdSubPartner} duration={400} />
                       </div>
                     </div>
                   </div>
                 ) : (
-                  <div className="space-y-4">
-                    <div className="bg-white rounded-2xl p-4 shadow-sm border border-blue-50">
-                      <div className="text-xs text-gray-500 mb-1">7% с рекл. бюджета личных лидов (ежемесячно)</div>
-                      <div className="font-['Raleway'] font-black text-2xl text-gray-900">
-                        <AnimatedNumber value={stage2Personal} />
+                  <div className="space-y-3">
+                    <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-blue-50">
+                      <div className="text-[10px] sm:text-xs text-gray-500 mb-1">7% рекл. личных (мес.)</div>
+                      <div className="font-['Raleway'] font-black text-lg sm:text-2xl text-gray-900">
+                        <AnimatedNumber value={stage2Personal} duration={400} />
                       </div>
                     </div>
 
-                    <div className="bg-white rounded-2xl p-4 shadow-sm border border-blue-50">
-                      <div className="text-xs text-gray-500 mb-1">3% с рекл. бюджета лидов партнёра (ежемесячно)</div>
-                      <div className="font-['Raleway'] font-black text-2xl text-gray-900">
-                        <AnimatedNumber value={stage2SubPartner} />
+                    <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-blue-50">
+                      <div className="text-[10px] sm:text-xs text-gray-500 mb-1">3% рекл. партнёра (мес.)</div>
+                      <div className="font-['Raleway'] font-black text-lg sm:text-2xl text-gray-900">
+                        <AnimatedNumber value={stage2SubPartner} duration={400} />
                       </div>
                     </div>
 
-                    <div className="mt-2 bg-yellow-50 rounded-xl p-3 border border-yellow-100">
-                      <div className="text-xs text-yellow-700 font-medium">
-                        Пожизненные выплаты — пока клиент работает с LabTG
+                    <div className="mt-2 bg-yellow-50 rounded-xl p-2 sm:p-3 border border-yellow-100">
+                      <div className="text-[10px] sm:text-xs text-yellow-700 font-medium">
+                        Пожизненные выплаты
                       </div>
                     </div>
                   </div>
                 )}
 
                 {/* Total */}
-                <div className="mt-6 brand-card p-5 text-center">
-                  <div className="text-white/80 text-sm mb-1">
-                    {stage === '1' ? 'Итого за период' : 'Ежемесячный пассивный доход'}
+                <div className="mt-4 brand-card p-4 sm:p-5 text-center">
+                  <div className="text-white/80 text-xs sm:text-sm mb-1">
+                    {stage === '1' ? 'Итого' : 'В месяц'}
                   </div>
-                  <div className="font-['Raleway'] font-black text-4xl md:text-5xl text-white">
-                    <AnimatedNumber value={total} />
+                  <div className="font-['Raleway'] font-black text-2xl sm:text-4xl md:text-5xl text-white">
+                    <AnimatedNumber value={total} duration={400} />
                   </div>
                   {stage === '2' && (
-                    <div className="text-white/70 text-xs mt-1">в месяц · пожизненно</div>
+                    <div className="text-white/70 text-[10px] sm:text-xs mt-1">пожизненно</div>
                   )}
                 </div>
 
                 <a
                   href="#contact"
-                  className="btn-gradient w-full text-center block mt-4 text-base"
+                  className="btn-gradient w-full text-center block mt-3 text-xs sm:text-base py-3 sm:py-4"
                 >
-                  Хочу столько зарабатывать →
+                  Хочу столько →
                 </a>
               </div>
             </div>

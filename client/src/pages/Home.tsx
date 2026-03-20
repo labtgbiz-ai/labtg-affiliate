@@ -9,7 +9,7 @@ import HowItWorksSection from '@/components/HowItWorksSection';
 import EarningsSection from '@/components/EarningsSection';
 import CalculatorSection from '@/components/CalculatorSection';
 import WhyLabTGSection from '@/components/WhyLabTGSection';
-import TeamSection from '@/components/TeamSection';
+
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 
@@ -48,7 +48,7 @@ export default function Home() {
       <EarningsSection />
       <CalculatorSection />
       <WhyLabTGSection />
-      <TeamSection />
+
       <ContactSection />
       <Footer />
     </div>
