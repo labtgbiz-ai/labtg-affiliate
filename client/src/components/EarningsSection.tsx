@@ -36,7 +36,7 @@ export default function EarningsSection() {
             className={`px-6 py-3 rounded-full font-['Raleway'] font-bold transition-all ${
               role === 'agent'
                 ? 'bg-[#1E9BF0] text-white shadow-lg'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
             }`}
           >
             Агент
@@ -46,7 +46,7 @@ export default function EarningsSection() {
             className={`px-6 py-3 rounded-full font-['Raleway'] font-bold transition-all ${
               role === 'partner'
                 ? 'bg-[#1E9BF0] text-white shadow-lg'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
             }`}
           >
             Партнер

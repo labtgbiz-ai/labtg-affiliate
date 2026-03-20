@@ -52,7 +52,6 @@ export default function CalculatorSection() {
   const calcRef = useScrollReveal(0.05);
 
   // Inputs
-  const [role, setRole] = useState<'agent' | 'partner'>('partner');
   const [personalLeads, setPersonalLeads] = useState(50);
   const [subPartnerLeads, setSubPartnerLeads] = useState(30);
   const [adBudgetPerLead, setAdBudgetPerLead] = useState(150000);
@@ -62,39 +61,23 @@ export default function CalculatorSection() {
   const personalSales = Math.round(personalLeads * CONVERSION);
   const subPartnerSales = Math.round(subPartnerLeads * CONVERSION);
 
+  // Partner calculations (simplified - only one role)
   let total = 0;
 
-  if (role === 'agent') {
-    if (stage === '1') {
-      // Agent Stage 1: 11% from service + 1.1% from ad budget
-      const agentServiceIncome = personalSales * AVG_CHECK * 0.11;
-      const agentAdIncome = personalLeads * adBudgetPerLead * 0.011;
-      total = agentServiceIncome + agentAdIncome;
-    } else {
-      // Agent Stage 2: 11% from service + 1.1% from ad budget + 11% from subscribers + 11% from leads
-      const agentServiceIncome = personalSales * AVG_CHECK * 0.11;
-      const agentAdIncome = personalLeads * adBudgetPerLead * 0.011;
-      const agentSubscriberIncome = personalLeads * adBudgetPerLead * 0.11;
-      const agentLeadIncome = personalSales * AVG_CHECK * 0.11;
-      total = agentServiceIncome + agentAdIncome + agentSubscriberIncome + agentLeadIncome;
-    }
+  if (stage === '1') {
+    // Partner Stage 1: 7% + 0.7% from personal + 4% + 0.4% from sub-partner
+    const partnerPersonalService = personalSales * AVG_CHECK * 0.07;
+    const partnerPersonalAd = personalLeads * adBudgetPerLead * 0.007;
+    const partnerSubPartnerService = subPartnerSales * AVG_CHECK * 0.04;
+    const partnerSubPartnerAd = subPartnerLeads * adBudgetPerLead * 0.004;
+    total = partnerPersonalService + partnerPersonalAd + partnerSubPartnerService + partnerSubPartnerAd;
   } else {
-    // Partner role
-    if (stage === '1') {
-      // Partner Stage 1: 7% + 0.7% from personal + 4% + 0.4% from sub-partner
-      const partnerPersonalService = personalSales * AVG_CHECK * 0.07;
-      const partnerPersonalAd = personalLeads * adBudgetPerLead * 0.007;
-      const partnerSubPartnerService = subPartnerSales * AVG_CHECK * 0.04;
-      const partnerSubPartnerAd = subPartnerLeads * adBudgetPerLead * 0.004;
-      total = partnerPersonalService + partnerPersonalAd + partnerSubPartnerService + partnerSubPartnerAd;
-    } else {
-      // Partner Stage 2: 7% from subscribers + 7% from leads (personal) + 4% from subscribers + 4% from leads (sub-partner)
-      const partnerPersonalSubscribers = personalLeads * adBudgetPerLead * 0.07;
-      const partnerPersonalLeads = personalSales * AVG_CHECK * 0.07;
-      const partnerSubPartnerSubscribers = subPartnerLeads * adBudgetPerLead * 0.04;
-      const partnerSubPartnerLeads = subPartnerSales * AVG_CHECK * 0.04;
-      total = partnerPersonalSubscribers + partnerPersonalLeads + partnerSubPartnerSubscribers + partnerSubPartnerLeads;
-    }
+    // Partner Stage 2: 7% from subscribers + 7% from leads (personal) + 4% from subscribers + 4% from leads (sub-partner)
+    const partnerPersonalSubscribers = personalLeads * adBudgetPerLead * 0.07;
+    const partnerPersonalLeads = personalSales * AVG_CHECK * 0.07;
+    const partnerSubPartnerSubscribers = subPartnerLeads * adBudgetPerLead * 0.04;
+    const partnerSubPartnerLeads = subPartnerSales * AVG_CHECK * 0.04;
+    total = partnerPersonalSubscribers + partnerPersonalLeads + partnerSubPartnerSubscribers + partnerSubPartnerLeads;
   }
 
   const updateSlider = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -134,30 +117,6 @@ export default function CalculatorSection() {
         {/* Calculator */}
         <div ref={calcRef as any} className="reveal max-w-3xl mx-auto">
           <div className="glass-card rounded-3xl p-6 md:p-10 backdrop-blur-xl border border-white/20 shadow-2xl">
-            {/* Role Tabs */}
-            <div className="flex gap-3 mb-8">
-              <button
-                onClick={() => setRole('agent')}
-                className={`flex-1 px-4 py-3 rounded-xl font-['Raleway'] font-bold transition-all ${
-                  role === 'agent'
-                    ? 'bg-[#1E9BF0] text-white shadow-lg'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                Агент
-              </button>
-              <button
-                onClick={() => setRole('partner')}
-                className={`flex-1 px-4 py-3 rounded-xl font-['Raleway'] font-bold transition-all ${
-                  role === 'partner'
-                    ? 'bg-[#1E9BF0] text-white shadow-lg'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                Партнер
-              </button>
-            </div>
-
             {/* Stage Tabs */}
             <div className="flex gap-3 mb-8">
               <button
