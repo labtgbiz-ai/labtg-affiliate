@@ -22,3 +22,7 @@
 - [x] Add: Lead Attraction section (11 methods)
 - [x] Fix: invisible/broken elements on company landing (thorough audit - rewrote all sections with useCompanyReveal hook)
 - [ ] Configure custom domain labtg.ru for main site, /partners for affiliate
+- [x] Fix: Team section - white text on white background (fixed with inline styles)
+- [x] Change: "Начать проект" → "Обсудить проект" everywhere (Hero, Navbar desktop+mobile)
+- [x] Redesign: Lead-in-1-Click block as main UTP - 5-10x cheaper leads than market (prominent banner in AI section)
+- [x] Fix: AI agent description - qualifies leads and passes to manager (not replaces manager)

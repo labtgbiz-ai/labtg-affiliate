@@ -114,7 +114,7 @@ export default function CompanyNavbar() {
               onClick={(e) => handleNavClick(e, '#contact')}
               className="btn-gradient text-sm px-6 py-2.5 inline-block"
             >
-              Начать проект
+              Обсудить проект
             </a>
           </div>
 
@@ -167,7 +167,7 @@ export default function CompanyNavbar() {
             className="btn-gradient text-sm text-center mt-3"
             onClick={(e) => handleNavClick(e, '#contact')}
           >
-            Начать проект
+            Обсудить проект
           </a>
         </div>
       </div>

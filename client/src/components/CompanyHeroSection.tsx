@@ -71,7 +71,7 @@ export default function CompanyHeroSection() {
             {/* CTA buttons */}
             <div className="hero-animate flex flex-col sm:flex-row gap-3 pt-2">
               <a href="#contact" className="btn-gradient text-center text-base px-8 py-4 animate-pulse-glow shadow-xl shadow-blue-500/25">
-                Начать проект →
+                Обсудить проект →
               </a>
               <a href="#services" className="btn-outline text-center text-base px-8 py-4 border-2 border-[#1E9BF0] text-[#1E9BF0] rounded-full font-semibold hover:bg-blue-50 transition-colors">
                 Узнать больше
