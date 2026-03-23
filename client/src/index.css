@@ -225,6 +225,23 @@
     box-shadow: 0 12px 40px rgba(30, 155, 240, 0.4);
   }
 
+  /* Outline button */
+  .btn-outline {
+    background: transparent;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    font-weight: 700;
+    border-radius: 9999px;
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .btn-outline:hover {
+    background-color: rgba(30, 155, 240, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(30, 155, 240, 0.2);
+  }
+
   /* Scroll reveal animation */
   .reveal {
     opacity: 1;
