@@ -1,27 +1,10 @@
 /* LabTG — AI Lead Agent Section (Page 6 of presentation)
    "Наша суперсила" — AI agent that converts subscribers to clients in 1 click
 */
-import { useEffect, useRef } from 'react';
+import { useCompanyReveal } from '@/hooks/useScrollReveal';
 
 export default function AILeadAgentSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.05 }
-    );
-    const els = sectionRef.current?.querySelectorAll('.fade-up');
-    els?.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useCompanyReveal();
 
   return (
     <section ref={sectionRef} id="ai-agent" className="py-20 md:py-32 relative overflow-hidden bg-gradient-to-b from-white via-blue-50/30 to-white">
@@ -31,7 +14,7 @@ export default function AILeadAgentSection() {
 
       <div className="container relative z-10">
         {/* Section header */}
-        <div className="text-center mb-16 fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
+        <div className="text-center mb-16 fade-up">
           <span className="pill-badge pill-badge-blue text-sm mb-4 inline-block shadow-lg shadow-blue-500/20">
             Наша суперсила
           </span>
@@ -45,7 +28,7 @@ export default function AILeadAgentSection() {
 
         <div className="grid lg:grid-cols-2 gap-10 items-start">
           {/* Left: What it is + Key advantages */}
-          <div className="space-y-6 fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s' }}>
+          <div className="space-y-6 fade-up" data-delay="0.1">
             {/* What it is */}
             <div className="brand-card p-8 md:p-10">
               <h3 className="text-xl font-bold text-white mb-4">Что это?</h3>
@@ -71,7 +54,7 @@ export default function AILeadAgentSection() {
           </div>
 
           {/* Right: What it does */}
-          <div className="space-y-4 fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s' }}>
+          <div className="space-y-4 fade-up" data-delay="0.2">
             <h3 className="text-xl font-bold text-gray-900 mb-2">Что делает AI-агент:</h3>
 
             {/* Step 1 */}
@@ -123,7 +106,7 @@ export default function AILeadAgentSection() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-14 fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s' }}>
+        <div className="text-center mt-14 fade-up" data-delay="0.3">
           <div className="inline-block lavender-card px-10 py-6">
             <p className="text-lg font-bold text-gray-900">
               Лид в 1 клик — подписчик становится клиентом без участия менеджера

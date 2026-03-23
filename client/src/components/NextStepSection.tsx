@@ -1,10 +1,10 @@
 /* LabTG — Next Step CTA Section (Page 14 of presentation)
    "Следующий шаг к росту вашего бизнеса"
 */
-import { useEffect, useRef } from 'react';
+import { useCompanyReveal } from '@/hooks/useScrollReveal';
 
 const steps = [
-  { num: '01', text: 'Перейдите по ссылке → LabTG Менеджер' },
+  { num: '01', text: 'Перейдите по ссылке — LabTG Менеджер' },
   { num: '02', text: 'Напишите нашему менеджеру' },
   { num: '03', text: 'Согласуйте время личной встречи с экспертами LabTG' },
 ];
@@ -16,24 +16,7 @@ const benefits = [
 ];
 
 export default function NextStepSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.05 }
-    );
-    const els = sectionRef.current?.querySelectorAll('.fade-up');
-    els?.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useCompanyReveal();
 
   return (
     <section ref={sectionRef} id="contact" className="py-20 md:py-32 relative overflow-hidden bg-gradient-to-b from-blue-50/30 to-white">
@@ -46,14 +29,14 @@ export default function NextStepSection() {
 
       <div className="container relative z-10 max-w-3xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12 fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
+        <div className="text-center mb-12 fade-up">
           <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4 leading-tight">
             Следующий шаг<br />к росту вашего бизнеса
           </h2>
         </div>
 
         {/* Steps */}
-        <div className="space-y-4 mb-10 fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s' }}>
+        <div className="space-y-4 mb-10 fade-up" data-delay="0.1">
           {steps.map((step) => (
             <div key={step.num} className="flex items-center gap-4 bg-blue-50/60 rounded-2xl px-6 py-4">
               <span className="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4D4FF] to-[#E8EEFF] text-gray-700 flex items-center justify-center font-bold text-sm shrink-0">
@@ -65,7 +48,7 @@ export default function NextStepSection() {
         </div>
 
         {/* What you get */}
-        <div className="mb-10 fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s' }}>
+        <div className="mb-10 fade-up" data-delay="0.2">
           <span className="pill-badge pill-badge-light text-xs mb-4 inline-block">Что получите на встрече</span>
           <div className="flex flex-wrap gap-3">
             {benefits.map((b, i) => (
@@ -80,7 +63,7 @@ export default function NextStepSection() {
         </div>
 
         {/* CTA Button */}
-        <div className="text-center fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s' }}>
+        <div className="text-center fade-up" data-delay="0.3">
           <a
             href="https://t.me/labtg_manager"
             target="_blank"

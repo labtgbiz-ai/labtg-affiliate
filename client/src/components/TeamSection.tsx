@@ -1,7 +1,7 @@
 /* LabTG — Team Section (Page 12 of presentation)
    "Наша команда" — 3 co-founders with detailed achievements
 */
-import { useEffect, useRef } from 'react';
+import { useCompanyReveal } from '@/hooks/useScrollReveal';
 
 const team = [
   {
@@ -52,24 +52,7 @@ const team = [
 ];
 
 export default function TeamSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.05 }
-    );
-    const els = sectionRef.current?.querySelectorAll('.fade-up');
-    els?.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useCompanyReveal();
 
   return (
     <section ref={sectionRef} id="team" className="py-20 md:py-32 relative overflow-hidden bg-gradient-to-b from-white via-blue-50/20 to-white">
@@ -77,7 +60,7 @@ export default function TeamSection() {
 
       <div className="container relative z-10">
         {/* Header */}
-        <div className="text-center mb-14 fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
+        <div className="text-center mb-14 fade-up">
           <span className="pill-badge pill-badge-light text-sm mb-4 inline-block">
             Команда
           </span>
@@ -92,11 +75,7 @@ export default function TeamSection() {
         {/* Team cards */}
         <div className="grid md:grid-cols-3 gap-6">
           {team.map((member, i) => (
-            <div
-              key={member.name}
-              className="fade-up"
-              style={{ opacity: 0, transform: 'translateY(30px)', transition: `opacity 0.7s ease ${0.1 + i * 0.1}s, transform 0.7s ease ${0.1 + i * 0.1}s` }}
-            >
+            <div key={member.name} className="fade-up" data-delay={String(0.1 + i * 0.1)}>
               <div className={`bg-gradient-to-br ${member.gradient} rounded-2xl p-7 md:p-8 h-full text-white card-hover`}>
                 {/* Avatar + Name */}
                 <div className="flex items-center gap-4 mb-5">

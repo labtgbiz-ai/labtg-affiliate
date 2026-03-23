@@ -1,7 +1,7 @@
 /* LabTG — Producing & Scaling Section (Pages 10-11 of presentation)
    "Продюсирование и масштабирование бизнеса" + Постоплата + Инвестиции
 */
-import { useEffect, useRef } from 'react';
+import { useCompanyReveal } from '@/hooks/useScrollReveal';
 
 const stages = [
   { label: 'Этап 1', title: 'Настройка системы', items: ['Упаковка', 'Автоматизация', 'Контент', 'Трафик', 'Лидогенерация', 'Аналитика'] },
@@ -17,24 +17,7 @@ const postpaySteps = [
 ];
 
 export default function ProducingSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.05 }
-    );
-    const els = sectionRef.current?.querySelectorAll('.fade-up');
-    els?.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useCompanyReveal();
 
   return (
     <section ref={sectionRef} className="py-20 md:py-32 relative overflow-hidden bg-white">
@@ -42,7 +25,7 @@ export default function ProducingSection() {
 
       <div className="container relative z-10">
         {/* Header */}
-        <div className="text-center mb-14 fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
+        <div className="text-center mb-14 fade-up">
           <span className="pill-badge pill-badge-light text-sm mb-4 inline-block">
             06 / Масштабирование
           </span>
@@ -55,7 +38,7 @@ export default function ProducingSection() {
         </div>
 
         {/* 3 Stages */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16 fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s' }}>
+        <div className="grid md:grid-cols-3 gap-6 mb-16 fade-up" data-delay="0.1">
           {stages.map((stage, i) => (
             <div key={i} className="glass-card rounded-2xl p-7 card-hover">
               <span className="pill-badge pill-badge-blue text-xs mb-4 inline-block">{stage.label}</span>
@@ -75,7 +58,7 @@ export default function ProducingSection() {
         </div>
 
         {/* Postpay model + Investment help */}
-        <div className="grid lg:grid-cols-2 gap-8 fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s' }}>
+        <div className="grid lg:grid-cols-2 gap-8 fade-up" data-delay="0.2">
           {/* Postpay */}
           <div className="brand-card p-8 md:p-10">
             <h3 className="text-xl font-bold text-white mb-6">Формат работы с постоплатой</h3>

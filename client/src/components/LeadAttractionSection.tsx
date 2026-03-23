@@ -1,7 +1,7 @@
 /* LabTG — Lead Attraction Section (Pages 7-8 of presentation)
    "11 самых эффективных технологий привлечения подписчиков и лидов"
 */
-import { useEffect, useRef } from 'react';
+import { useCompanyReveal } from '@/hooks/useScrollReveal';
 
 const methods = [
   { num: '01', title: 'Telegram Ads', desc: 'Официальная таргетированная реклама в Telegram' },
@@ -18,24 +18,7 @@ const methods = [
 ];
 
 export default function LeadAttractionSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.05 }
-    );
-    const els = sectionRef.current?.querySelectorAll('.fade-up');
-    els?.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useCompanyReveal();
 
   return (
     <section ref={sectionRef} id="lead-attraction" className="py-20 md:py-32 relative overflow-hidden bg-white">
@@ -43,7 +26,7 @@ export default function LeadAttractionSection() {
 
       <div className="container relative z-10">
         {/* Header */}
-        <div className="text-center mb-14 fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
+        <div className="text-center mb-14 fade-up">
           <span className="pill-badge pill-badge-light text-sm mb-4 inline-block">
             04 / Привлечение
           </span>
@@ -57,7 +40,7 @@ export default function LeadAttractionSection() {
         </div>
 
         {/* Grid of 11 methods */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10 fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s' }}>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10 fade-up" data-delay="0.15">
           {methods.map((m) => (
             <div key={m.num} className="glass-card rounded-2xl p-6 card-hover group">
               <div className="flex items-start gap-3">

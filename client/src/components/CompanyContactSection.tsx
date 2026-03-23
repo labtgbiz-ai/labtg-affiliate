@@ -1,10 +1,11 @@
 /* LabTG Company Landing — Contact Section
    Design: CTA form for company inquiries
 */
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useCompanyReveal } from '@/hooks/useScrollReveal';
 
 export default function CompanyContactSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useCompanyReveal();
   const formRef = useRef<HTMLFormElement>(null);
 
   const [formData, setFormData] = useState({
@@ -16,25 +17,6 @@ export default function CompanyContactSection() {
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.05 }
-    );
-
-    const els = sectionRef.current?.querySelectorAll('.fade-up');
-    els?.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -68,14 +50,14 @@ export default function CompanyContactSection() {
     `w-full px-4 py-3 rounded-xl border ${errors[field] ? 'border-red-300 bg-red-50/50' : 'border-gray-200 bg-white'} focus:border-[#1E9BF0] focus:outline-none focus:ring-2 focus:ring-[#1E9BF0]/20 transition-all text-sm`;
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-32 bg-gradient-to-b from-blue-50/50 to-white relative overflow-hidden" id="contact">
+    <section ref={sectionRef} className="py-20 md:py-32 bg-gradient-to-b from-blue-50/50 to-white relative overflow-hidden" id="company-contact">
       {/* Background blobs */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100 rounded-full blur-3xl opacity-10" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-100 rounded-full blur-3xl opacity-10" />
 
       <div className="container relative z-10">
         {/* Section header */}
-        <div className="mb-16 text-center fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
+        <div className="mb-16 text-center fade-up">
           <span className="pill-badge pill-badge-light text-sm mb-4 inline-block">Связаться с нами</span>
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
             Готовы начать?
@@ -86,7 +68,7 @@ export default function CompanyContactSection() {
         </div>
 
         {/* Form container */}
-        <div className="max-w-2xl mx-auto fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s' }}>
+        <div className="max-w-2xl mx-auto fade-up" data-delay="0.15">
           <div className="glass-card p-8 md:p-12 rounded-3xl">
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
               <div className="grid sm:grid-cols-2 gap-5">

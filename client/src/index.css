@@ -242,7 +242,13 @@
     box-shadow: 0 8px 24px rgba(30, 155, 240, 0.2);
   }
 
-  /* Scroll reveal animation — new system */
+  /* Scroll reveal animation — CSS-only approach with @starting-style fallback */
+  /* Elements are ALWAYS visible. Animation is purely additive. */
+  .fade-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .fade-up.animate-in {
     opacity: 1 !important;
     transform: translateY(0) !important;

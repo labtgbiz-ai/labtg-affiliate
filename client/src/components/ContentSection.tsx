@@ -1,7 +1,7 @@
 /* LabTG — Content & Engagement Section (Page 9 of presentation)
    "Контент и вовлечение"
 */
-import { useEffect, useRef } from 'react';
+import { useCompanyReveal } from '@/hooks/useScrollReveal';
 
 const items = [
   { icon: '📋', title: 'Контент-стратегия', desc: 'Разработка контент-стратегии и ведение канала' },
@@ -11,31 +11,14 @@ const items = [
 ];
 
 export default function ContentSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.05 }
-    );
-    const els = sectionRef.current?.querySelectorAll('.fade-up');
-    els?.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useCompanyReveal();
 
   return (
     <section ref={sectionRef} className="py-20 md:py-28 relative overflow-hidden bg-gradient-to-b from-white via-blue-50/20 to-white">
       <div className="container relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left */}
-          <div className="fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
+          <div className="fade-up">
             <span className="pill-badge pill-badge-light text-sm mb-4 inline-block">
               05 / Контент
             </span>
@@ -60,7 +43,7 @@ export default function ContentSection() {
           </div>
 
           {/* Right — Key result */}
-          <div className="fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s' }}>
+          <div className="fade-up" data-delay="0.15">
             <div className="lavender-card p-10 md:p-12 text-center">
               <span className="pill-badge pill-badge-dark text-xs mb-6 inline-block">Ключевой результат</span>
               <p className="text-xl md:text-2xl font-black text-gray-900 leading-snug">

@@ -1,29 +1,10 @@
 /* LabTG Company Landing — Services Section
    Design: Three service cards with detailed information
 */
-import { useEffect, useRef } from 'react';
+import { useCompanyReveal } from '@/hooks/useScrollReveal';
 
 export default function CompanyServicesSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.05 }
-    );
-
-    const els = sectionRef.current?.querySelectorAll('.fade-up');
-    els?.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useCompanyReveal();
 
   const services = [
     {
@@ -84,7 +65,7 @@ export default function CompanyServicesSection() {
 
       <div className="container relative z-10">
         {/* Section header */}
-        <div className="mb-16 text-center fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
+        <div className="mb-16 text-center fade-up">
           <span className="pill-badge pill-badge-light text-sm mb-4 inline-block">Наши услуги</span>
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
             Комплексный подход к развитию бизнеса
@@ -97,11 +78,7 @@ export default function CompanyServicesSection() {
         {/* Services cards */}
         <div className="space-y-8">
           {services.map((service, idx) => (
-            <div
-              key={idx}
-              className="fade-up"
-              style={{ opacity: 0, transform: 'translateY(30px)', transition: `opacity 0.7s ease ${idx * 0.15}s, transform 0.7s ease ${idx * 0.15}s` }}
-            >
+            <div key={idx} className="fade-up" data-delay={String(idx * 0.12)}>
               <div className="glass-card p-8 md:p-10 rounded-3xl card-hover">
                 {/* Header */}
                 <div className="flex items-start gap-4 md:gap-6 mb-8">

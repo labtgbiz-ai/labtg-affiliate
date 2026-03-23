@@ -20,3 +20,5 @@
 - [x] Add: Producing & Scaling section (postpay model + investments)
 - [x] Add: Next Step CTA section
 - [x] Add: Lead Attraction section (11 methods)
+- [x] Fix: invisible/broken elements on company landing (thorough audit - rewrote all sections with useCompanyReveal hook)
+- [ ] Configure custom domain labtg.ru for main site, /partners for affiliate
