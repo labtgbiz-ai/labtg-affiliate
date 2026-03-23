@@ -10,3 +10,13 @@
 - [x] Add partner program link in footer
 - [x] Improve mobile menu with overlay and rounded panel
 - [x] Add animations where appropriate (modern and beautiful)
+- [x] Fix: footer text invisible (contrast issue - switched to inline styles with dark bg)
+- [x] Add: Team section from presentation (3 founders with details)
+- [x] Add: Work Principles section from presentation (4 principles)
+- [x] Add: Lead-in-1-Click technology section (part of AI Agent section)
+- [x] Add: AI Lead Agent section (create, implement, train turnkey)
+- [x] Ensure all presentation content is represented on landing page
+- [x] Add: Content & Engagement section
+- [x] Add: Producing & Scaling section (postpay model + investments)
+- [x] Add: Next Step CTA section
+- [x] Add: Lead Attraction section (11 methods)

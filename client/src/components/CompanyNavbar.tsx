@@ -11,7 +11,8 @@ export default function CompanyNavbar() {
   const navLinks = [
     { href: '#about', label: 'О компании', id: 'about' },
     { href: '#services', label: 'Услуги', id: 'services' },
-    { href: '#cases', label: 'Кейсы', id: 'cases' },
+    { href: '#ai-agent', label: 'AI-агент', id: 'ai-agent' },
+    { href: '#team', label: 'Команда', id: 'team' },
     { href: '#contact', label: 'Контакты', id: 'contact' },
   ];
 

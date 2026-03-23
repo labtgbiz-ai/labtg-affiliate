@@ -1,12 +1,19 @@
 /* LabTG Company Landing — Main Page
-   Assembles all sections: Hero, About, Services, Cases, Contact, Footer
+   Full presentation structure:
+   Hero → About → Services → AI Lead Agent → Lead Attraction → Content → Producing → Team → Principles → Next Step CTA → Footer
 */
 import CompanyNavbar from '@/components/CompanyNavbar';
 import CompanyHeroSection from '@/components/CompanyHeroSection';
 import CompanyAboutSection from '@/components/CompanyAboutSection';
 import CompanyServicesSection from '@/components/CompanyServicesSection';
+import AILeadAgentSection from '@/components/AILeadAgentSection';
+import LeadAttractionSection from '@/components/LeadAttractionSection';
+import ContentSection from '@/components/ContentSection';
+import ProducingSection from '@/components/ProducingSection';
+import TeamSection from '@/components/TeamSection';
+import PrinciplesSection from '@/components/PrinciplesSection';
 import CaseStudiesSection from '@/components/CaseStudiesSection';
-import CompanyContactSection from '@/components/CompanyContactSection';
+import NextStepSection from '@/components/NextStepSection';
 import CompanyFooter from '@/components/CompanyFooter';
 
 export default function CompanyHome() {
@@ -16,8 +23,14 @@ export default function CompanyHome() {
       <CompanyHeroSection />
       <CompanyAboutSection />
       <CompanyServicesSection />
+      <AILeadAgentSection />
+      <LeadAttractionSection />
+      <ContentSection />
+      <ProducingSection />
+      <TeamSection />
+      <PrinciplesSection />
       <CaseStudiesSection />
-      <CompanyContactSection />
+      <NextStepSection />
       <CompanyFooter />
     </div>
   );

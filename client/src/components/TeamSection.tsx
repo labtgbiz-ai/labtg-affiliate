@@ -1,122 +1,136 @@
-/* LabTG Affiliate — Team Section
-   Design: White bg, blue cards for team members (like in presentation)
+/* LabTG — Team Section (Page 12 of presentation)
+   "Наша команда" — 3 co-founders with detailed achievements
 */
-import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useEffect, useRef } from 'react';
 
 const team = [
   {
     name: 'Алексей Левин',
     role: 'Основатель и CEO',
-    stats: [
-      { value: '3 года', label: 'в политических технологиях' },
-      { value: '5+ лет', label: 'продвижения в Telegram' },
-      { value: '100+ млн ₽', label: 'реализованного бюджета' },
-    ],
-    desc: 'Сотни успешных кейсов с компаниями в топовых нишах Telegram (бизнес, маркетплейсы, недвижимость, инвестиции) на рынках России, СНГ, Европы.',
     initials: 'АЛ',
+    highlights: [
+      { label: '3 года', desc: 'в политических технологиях' },
+      { label: '5+ лет', desc: 'в продвижении в Telegram' },
+    ],
+    achievements: [
+      'Более 100 млн рублей успешно реализованного маркетингового бюджета',
+      'Сотни успешных кейсов в топовых нишах Telegram (бизнес, маркетплейсы, недвижимость, инвестиции)',
+      'Опыт работы на разных рынках: Россия, СНГ, Европа',
+    ],
+    gradient: 'from-[#1E9BF0] to-[#0d7fd8]',
   },
   {
     name: 'Вадим Нижник',
     role: 'Сооснователь и COO',
-    stats: [
-      { value: '3+ лет', label: 'создания видеоконтента' },
-      { value: '200+', label: 'человек в командах' },
-      { value: '10+ лет', label: 'масштабирования бизнеса' },
-    ],
-    desc: 'Эксперт в управлении маркетинговыми и IT командами. Масштабирование и развитие бизнеса на рынках России, Европы, США.',
     initials: 'ВН',
+    highlights: [
+      { label: '3+ лет', desc: 'в создании видеоконтента' },
+      { label: '200+', desc: 'человек в управлении' },
+    ],
+    achievements: [
+      'Эксперт в управлении маркетинговыми и IT командами',
+      'Более 10 лет опыта в масштабировании и развитии бизнеса',
+      'Опыт на разных рынках: Россия, Европа, США',
+    ],
+    gradient: 'from-[#1E9BF0] to-[#6366f1]',
   },
   {
     name: 'Владислав Хухарев',
     role: 'Сооснователь, CPO, CVO',
-    stats: [
-      { value: '5+ лет', label: 'IT-продукты автоматизации' },
-      { value: '8+ лет', label: 'digital маркетинг' },
-      { value: '10 млрд ₽', label: 'выручка клиентов' },
-    ],
-    desc: 'Эксперт в digital маркетинге и автоворонках продаж в мессенджерах. Сотни успешных кейсов на рынках России, СНГ, Европы, США.',
     initials: 'ВХ',
+    highlights: [
+      { label: '5+ лет', desc: 'в создании IT-продуктов' },
+      { label: '8+ лет', desc: 'в digital маркетинге' },
+    ],
+    achievements: [
+      'Суммарная капитализация компаний более 10 млн$',
+      'Эксперт в автоворонках продаж в мессенджерах и соцсетях',
+      'Опыт работы со стартапами и компаниями с 10+ млрд руб. выручки в год',
+    ],
+    gradient: 'from-[#6366f1] to-[#1E9BF0]',
   },
 ];
 
 export default function TeamSection() {
-  const titleRef = useScrollReveal();
-  const t1Ref = useScrollReveal(0.1);
-  const t2Ref = useScrollReveal(0.1);
-  const t3Ref = useScrollReveal(0.1);
-  const teamRefs = [t1Ref, t2Ref, t3Ref];
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+    const els = sectionRef.current?.querySelectorAll('.fade-up');
+    els?.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="py-20 md:py-28 bg-white relative overflow-hidden">
-      <span className="deco-number left-[-2rem] top-8">04</span>
+    <section ref={sectionRef} id="team" className="py-20 md:py-32 relative overflow-hidden bg-gradient-to-b from-white via-blue-50/20 to-white">
+      <div className="absolute top-20 left-0 w-[400px] h-[400px] bg-blue-100 rounded-full blur-3xl opacity-10" />
 
       <div className="container relative z-10">
-        {/* Title */}
-        <div ref={titleRef as any} className="reveal text-center mb-14">
-          <span className="pill-badge pill-badge-light mb-4 inline-flex">Команда</span>
-          <h2 className="font-['Raleway'] font-black text-3xl md:text-5xl text-gray-900 mt-3">
-            Эксперты, которым доверяют
+        {/* Header */}
+        <div className="text-center mb-14 fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
+          <span className="pill-badge pill-badge-light text-sm mb-4 inline-block">
+            Команда
+          </span>
+          <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">
+            Наша команда
           </h2>
-          <p className="text-gray-500 text-lg mt-4 max-w-xl mx-auto">
-            Три сооснователя с совокупным опытом более 20 лет в маркетинге, IT и масштабировании бизнеса
+          <p className="text-lg text-gray-500 max-w-xl mx-auto">
+            Эксперты с многолетним опытом в маркетинге, IT и развитии бизнеса
           </p>
         </div>
 
+        {/* Team cards */}
         <div className="grid md:grid-cols-3 gap-6">
           {team.map((member, i) => (
             <div
               key={member.name}
-              ref={teamRefs[i] as any}
-              className="reveal card-hover brand-card p-6 md:p-7 flex flex-col gap-4"
-              style={{ transitionDelay: `${i * 0.1}s` }}
+              className="fade-up"
+              style={{ opacity: 0, transform: 'translateY(30px)', transition: `opacity 0.7s ease ${0.1 + i * 0.1}s, transform 0.7s ease ${0.1 + i * 0.1}s` }}
             >
-              {/* Avatar + name */}
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center flex-shrink-0">
-                  <span className="font-['Raleway'] font-black text-white text-lg">{member.initials}</span>
-                </div>
-                <div>
-                  <h3 className="font-['Raleway'] font-black text-white text-lg leading-tight">{member.name}</h3>
-                  <span className="bg-white/20 text-white text-xs font-semibold px-2.5 py-0.5 rounded-full inline-block mt-1">
-                    {member.role}
-                  </span>
-                </div>
-              </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-2">
-                {member.stats.map((stat) => (
-                  <div key={stat.label} className="bg-white/10 rounded-xl p-2.5 text-center">
-                    <div className="font-['Raleway'] font-black text-white text-sm leading-tight">{stat.value}</div>
-                    <div className="text-white/60 text-[10px] leading-tight mt-0.5">{stat.label}</div>
+              <div className={`bg-gradient-to-br ${member.gradient} rounded-2xl p-7 md:p-8 h-full text-white card-hover`}>
+                {/* Avatar + Name */}
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center shrink-0">
+                    <span className="font-black text-white text-lg">{member.initials}</span>
                   </div>
-                ))}
-              </div>
+                  <div>
+                    <h3 className="text-xl font-black">{member.name}</h3>
+                    <span className="inline-block bg-white/20 rounded-full px-3 py-1 text-xs font-semibold mt-1">{member.role}</span>
+                  </div>
+                </div>
 
-              {/* Description */}
-              <p className="text-white/80 text-sm leading-relaxed">{member.desc}</p>
-            </div>
-          ))}
-        </div>
+                {/* Highlights */}
+                <div className="grid grid-cols-2 gap-3 mb-5">
+                  {member.highlights.map((h, j) => (
+                    <div key={j} className="bg-white/10 rounded-xl p-3 text-center">
+                      <div className="text-lg font-black">{h.label}</div>
+                      <p className="text-white/70 text-xs">{h.desc}</p>
+                    </div>
+                  ))}
+                </div>
 
-        {/* Principles */}
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {[
-            { title: 'Экологичность', desc: 'Работаем только с экологичными компаниями' },
-            { title: 'Сверхрезультат', desc: 'Всегда делаем больше, чем от нас ожидают' },
-            { title: 'Профи и фанаты', desc: 'Фанаты своего дела — это не просто работа' },
-            { title: 'Репутация вдолгую', desc: 'Строим долгосрочные партнёрства' },
-          ].map((p, i) => (
-            <div
-              key={p.title}
-              className="lavender-card p-5 card-hover"
-              style={{ transitionDelay: `${i * 0.05}s` }}
-            >
-              <div className="pill-badge pill-badge-light text-xs mb-2 inline-flex">
-                Принцип {i + 1}
+                {/* Achievements */}
+                <ul className="space-y-2.5">
+                  {member.achievements.map((a, j) => (
+                    <li key={j} className="flex items-start gap-2 text-sm text-white/85 leading-relaxed">
+                      <svg className="w-4 h-4 text-white/50 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      {a}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <h4 className="font-['Raleway'] font-bold text-gray-900 text-base mb-1">{p.title}</h4>
-              <p className="text-gray-600 text-sm">{p.desc}</p>
             </div>
           ))}
         </div>
