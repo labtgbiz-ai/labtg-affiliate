@@ -1,19 +1,22 @@
 /* LabTG Affiliate Landing Page — Main Home
    Design: Glassmorphism + Gradient Mesh
-   Sections: Hero → HowItWorks → Earnings → Calculator → WhyLabTG → Team → Contact → Footer
+   Sections: Hero → HowItWorks → Earnings → Calculator → WhyLabTG → Contact → Footer
 */
 import { useEffect } from 'react';
+import { useAuth } from "@/_core/hooks/useAuth";
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import HowItWorksSection from '@/components/HowItWorksSection';
 import EarningsSection from '@/components/EarningsSection';
 import CalculatorSection from '@/components/CalculatorSection';
 import WhyLabTGSection from '@/components/WhyLabTGSection';
-
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 
 export default function Home() {
+  // The userAuth hooks provides authentication state
+  let { user, loading, error, isAuthenticated, logout } = useAuth();
+
   // Initialize scroll reveal for all .reveal elements
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -48,7 +51,6 @@ export default function Home() {
       <EarningsSection />
       <CalculatorSection />
       <WhyLabTGSection />
-
       <ContactSection />
       <Footer />
     </div>

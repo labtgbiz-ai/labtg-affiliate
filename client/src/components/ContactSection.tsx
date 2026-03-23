@@ -1,29 +1,83 @@
 /* LabTG Affiliate — Contact / CTA Section
    Design: White bg, centered form, glass card, blue CTA
+   Integration: tRPC + Telegram bot for form submissions
 */
 import { useState } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { trpc } from '@/lib/trpc';
+import { toast } from 'sonner';
 
 export default function ContactSection() {
   const titleRef = useScrollReveal();
   const formRef = useScrollReveal(0.1);
 
-  const [form, setForm] = useState({ name: '', phone: '', telegram: '', comment: '' });
+  const [form, setForm] = useState({ name: '', phone: '', telegram: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const submitForm = trpc.partners.submitForm.useMutation({
+    onSuccess: (data) => {
+      if (data.success) {
+        setSubmitted(true);
+        toast.success(data.message);
+        setForm({ name: '', phone: '', telegram: '', message: '' });
+      } else {
+        toast.error(data.message);
+      }
+    },
+    onError: (error) => {
+      toast.error('Ошибка отправки. Попробуйте позже.');
+      console.error('Form submission error:', error);
+    },
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    // Clear error for this field
+    if (errors[e.target.name]) {
+      setErrors({ ...errors, [e.target.name]: '' });
+    }
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: Record<string, string> = {};
+
+    if (!form.name.trim() || form.name.length < 2) {
+      newErrors.name = 'Имя должно быть минимум 2 символа';
+    }
+
+    const phoneRegex = /^\+?[0-9\s\-()]{10,}$/;
+    if (!form.phone.trim() || !phoneRegex.test(form.phone)) {
+      newErrors.phone = 'Некорректный номер телефона';
+    }
+
+    const telegramRegex = /^@?[a-zA-Z0-9_]{5,32}$/;
+    if (!form.telegram.trim() || !telegramRegex.test(form.telegram)) {
+      newErrors.telegram = 'Некорректное имя пользователя Telegram (5-32 символа)';
+    }
+
+    if (!form.message.trim() || form.message.length < 10) {
+      newErrors.message = 'Сообщение должно быть минимум 10 символов';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    // Simulate submit
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 1200);
+
+    if (!validateForm()) {
+      toast.error('Пожалуйста, заполните все поля корректно');
+      return;
+    }
+
+    submitForm.mutate({
+      name: form.name.trim(),
+      phone: form.phone.trim(),
+      telegram: form.telegram.trim().replace(/^@/, ''),
+      message: form.message.trim(),
+    });
   };
 
   return (
@@ -58,10 +112,10 @@ export default function ContactSection() {
                       name="name"
                       value={form.name}
                       onChange={handleChange}
-                      required
                       placeholder="Алексей Иванов"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E9BF0]/30 focus:border-[#1E9BF0] transition-all text-sm"
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.name ? 'border-red-400' : 'border-gray-200'} bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E9BF0]/30 focus:border-[#1E9BF0] transition-all text-sm`}
                     />
+                    {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -72,10 +126,10 @@ export default function ContactSection() {
                       name="phone"
                       value={form.phone}
                       onChange={handleChange}
-                      required
                       placeholder="+7 (999) 000-00-00"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E9BF0]/30 focus:border-[#1E9BF0] transition-all text-sm"
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.phone ? 'border-red-400' : 'border-gray-200'} bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E9BF0]/30 focus:border-[#1E9BF0] transition-all text-sm`}
                     />
+                    {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
                   </div>
                 </div>
 
@@ -91,31 +145,33 @@ export default function ContactSection() {
                       value={form.telegram}
                       onChange={handleChange}
                       placeholder="username"
-                      className="w-full pl-8 pr-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E9BF0]/30 focus:border-[#1E9BF0] transition-all text-sm"
+                      className={`w-full pl-8 pr-4 py-3 rounded-xl border ${errors.telegram ? 'border-red-400' : 'border-gray-200'} bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E9BF0]/30 focus:border-[#1E9BF0] transition-all text-sm`}
                     />
                   </div>
+                  {errors.telegram && <p className="text-red-400 text-xs mt-1">{errors.telegram}</p>}
                 </div>
 
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Расскажите о себе
+                    Расскажите о себе <span className="text-red-400">*</span>
                   </label>
                   <textarea
-                    name="comment"
-                    value={form.comment}
+                    name="message"
+                    value={form.message}
                     onChange={handleChange}
                     rows={3}
                     placeholder="Кто вы, какая аудитория, почему хотите стать партнёром..."
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E9BF0]/30 focus:border-[#1E9BF0] transition-all text-sm resize-none"
+                    className={`w-full px-4 py-3 rounded-xl border ${errors.message ? 'border-red-400' : 'border-gray-200'} bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E9BF0]/30 focus:border-[#1E9BF0] transition-all text-sm resize-none`}
                   />
+                  {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message}</p>}
                 </div>
 
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={submitForm.isPending}
                   className="btn-gradient w-full text-base py-4 flex items-center justify-center gap-2 disabled:opacity-70"
                 >
-                  {loading ? (
+                  {submitForm.isPending ? (
                     <>
                       <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none">
                         <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="3" strokeDasharray="30 60"/>
