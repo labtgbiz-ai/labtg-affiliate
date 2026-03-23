@@ -20,7 +20,7 @@ export default function CompanyFooter() {
                 <span className="font-['Raleway'] font-black text-lg tracking-tight" style={{ color: '#ffffff' }}>LabTG</span>
               </div>
             </div>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: '#9CA3AF' }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: '#D1D5DB' }}>
               Продюсерский центр полного цикла для развития вашего бизнеса в Telegram.
             </p>
             {/* Partner program CTA */}
@@ -39,7 +39,7 @@ export default function CompanyFooter() {
           {/* Services */}
           <div>
             <h4 className="font-bold mb-4 text-sm uppercase tracking-wider" style={{ color: '#ffffff' }}>Услуги</h4>
-            <ul className="space-y-2.5 text-sm" style={{ color: '#9CA3AF' }}>
+            <ul className="space-y-2.5 text-sm" style={{ color: '#D1D5DB' }}>
               <li><a href="#services" className="hover:text-white transition-colors">Unit-экономика</a></li>
               <li><a href="#services" className="hover:text-white transition-colors">Упаковка & Дизайн</a></li>
               <li><a href="#ai-agent" className="hover:text-white transition-colors">AI-лид-агент</a></li>
@@ -51,7 +51,7 @@ export default function CompanyFooter() {
           {/* Company */}
           <div>
             <h4 className="font-bold mb-4 text-sm uppercase tracking-wider" style={{ color: '#ffffff' }}>Компания</h4>
-            <ul className="space-y-2.5 text-sm" style={{ color: '#9CA3AF' }}>
+            <ul className="space-y-2.5 text-sm" style={{ color: '#D1D5DB' }}>
               <li><a href="#about" className="hover:text-white transition-colors">О нас</a></li>
               <li><a href="#team" className="hover:text-white transition-colors">Команда</a></li>
               <li><a href="#principles" className="hover:text-white transition-colors">Принципы</a></li>
@@ -63,7 +63,7 @@ export default function CompanyFooter() {
           {/* Contact */}
           <div>
             <h4 className="font-bold mb-4 text-sm uppercase tracking-wider" style={{ color: '#ffffff' }}>Контакты</h4>
-            <ul className="space-y-2.5 text-sm" style={{ color: '#9CA3AF' }}>
+            <ul className="space-y-2.5 text-sm" style={{ color: '#D1D5DB' }}>
               <li>
                 <a href="https://t.me/labtg_manager" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-2">
                   <svg className="w-4 h-4" style={{ color: '#1E9BF0' }} fill="currentColor" viewBox="0 0 24 24">
@@ -86,7 +86,7 @@ export default function CompanyFooter() {
 
         {/* Divider */}
         <div className="pt-8" style={{ borderTop: '1px solid #1f2937' }}>
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm" style={{ color: '#6B7280' }}>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm" style={{ color: '#9CA3AF' }}>
             <p>&copy; {currentYear} LabTG. Все права защищены.</p>
             <div className="flex gap-6">
               <a href="#" className="hover:text-gray-300 transition-colors">Политика конфиденциальности</a>

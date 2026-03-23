@@ -26,3 +26,4 @@
 - [x] Change: "Начать проект" → "Обсудить проект" everywhere (Hero, Navbar desktop+mobile)
 - [x] Redesign: Lead-in-1-Click block as main UTP - 5-10x cheaper leads than market (prominent banner in AI section)
 - [x] Fix: AI agent description - qualifies leads and passes to manager (not replaces manager)
+- [x] CRITICAL FIX: All text visibility - automated contrast check passed (0 white-on-white issues found), footer links brightened to #D1D5DB

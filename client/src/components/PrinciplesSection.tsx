@@ -1,6 +1,3 @@
-/* LabTG — Principles Section (Page 13 of presentation)
-   "Ключевые принципы LabTG" — Why work with us long-term
-*/
 import { useCompanyReveal } from '@/hooks/useScrollReveal';
 
 const principles = [
@@ -34,47 +31,40 @@ export default function PrinciplesSection() {
   const sectionRef = useCompanyReveal();
 
   return (
-    <section ref={sectionRef} id="principles" className="py-20 md:py-32 relative overflow-hidden bg-white">
-      <div className="absolute bottom-20 right-0 w-[500px] h-[500px] bg-purple-50 rounded-full blur-3xl opacity-20" />
+    <section ref={sectionRef} id="principles" className="py-20 md:py-32 relative overflow-hidden" style={{ background: '#ffffff' }}>
+      <div className="absolute bottom-20 right-0 w-96 h-96 rounded-full blur-3xl" style={{ background: '#f3e8ff', opacity: 0.3, position: 'absolute' }} />
 
       <div className="container relative z-10">
-        {/* Header */}
         <div className="text-center mb-14 fade-up">
-          <span className="pill-badge pill-badge-light text-sm mb-4 inline-block">
-            Принципы
-          </span>
-          <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">
+          <span className="pill-badge pill-badge-light text-sm mb-4 inline-block">Принципы</span>
+          <h2 className="text-3xl md:text-5xl font-black mb-4" style={{ color: '#111827' }}>
             Ключевые принципы LabTG
           </h2>
-          <p className="text-lg text-gray-500 max-w-xl mx-auto">
+          <p className="text-lg max-w-xl mx-auto" style={{ color: '#6b7280' }}>
             Почему с нами можно и нужно работать вдолгую
           </p>
         </div>
 
-        {/* Principles grid */}
         <div className="grid sm:grid-cols-2 gap-6 mb-12 fade-up" data-delay="0.1">
           {principles.map((p) => (
-            <div key={p.num} className="bg-purple-50 border border-purple-100 rounded-2xl p-7 md:p-8 card-hover">
+            <div key={p.num} className="rounded-2xl p-7 md:p-8 card-hover" style={{ background: '#faf5ff', border: '1px solid #e9d5ff' }}>
               <span className="pill-badge pill-badge-light text-xs mb-3 inline-block">
                 Принцип {p.num}. {p.title}
               </span>
-              <h3 className="text-lg md:text-xl font-black text-gray-900 mb-2 leading-snug">
+              <h3 className="text-lg md:text-xl font-black mb-2 leading-snug" style={{ color: '#111827' }}>
                 {p.headline}
               </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-sm leading-relaxed" style={{ color: '#4b5563' }}>
                 {p.desc}
               </p>
             </div>
           ))}
         </div>
 
-        {/* Big motto */}
         <div className="text-center fade-up" data-delay="0.25">
-          <div className="inline-block">
-            <p className="text-3xl md:text-5xl font-black text-gray-900 leading-tight">
-              Ваш успех <span className="gradient-text">= наша репутация</span>
-            </p>
-          </div>
+          <p className="text-3xl md:text-5xl font-black leading-tight" style={{ color: '#111827' }}>
+            Ваш успех <span className="gradient-text">= наша репутация</span>
+          </p>
         </div>
       </div>
     </section>

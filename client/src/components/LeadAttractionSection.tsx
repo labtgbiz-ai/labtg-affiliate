@@ -1,6 +1,3 @@
-/* LabTG — Lead Attraction Section (Pages 7-8 of presentation)
-   "11 самых эффективных технологий привлечения подписчиков и лидов"
-*/
 import { useCompanyReveal } from '@/hooks/useScrollReveal';
 
 const methods = [
@@ -21,43 +18,40 @@ export default function LeadAttractionSection() {
   const sectionRef = useCompanyReveal();
 
   return (
-    <section ref={sectionRef} id="lead-attraction" className="py-20 md:py-32 relative overflow-hidden bg-white">
-      <div className="absolute top-10 left-0 w-[400px] h-[400px] bg-blue-50 rounded-full blur-3xl opacity-30" />
+    <section ref={sectionRef} id="lead-attraction" className="py-20 md:py-32 relative overflow-hidden" style={{ background: '#ffffff' }}>
+      <div className="absolute top-10 left-0 w-96 h-96 rounded-full blur-3xl" style={{ background: '#eff6ff', opacity: 0.5, position: 'absolute' }} />
 
       <div className="container relative z-10">
-        {/* Header */}
         <div className="text-center mb-14 fade-up">
-          <span className="pill-badge pill-badge-light text-sm mb-4 inline-block">
-            04 / Привлечение
-          </span>
-          <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">
-            11 способов привлечения <br className="hidden md:block" />
+          <span className="pill-badge pill-badge-light text-sm mb-4 inline-block">04 / Привлечение</span>
+          <h2 className="text-3xl md:text-5xl font-black mb-4" style={{ color: '#111827' }}>
+            11 способов привлечения{' '}
+            <br className="hidden md:block" />
             <span className="gradient-text">целевых подписчиков и лидов</span>
           </h2>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Без аудитории нет продаж. Используем самые эффективные технологии и способы привлечения
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: '#6b7280' }}>
+            Без аудитории нет продаж. Используем самые эффективные технологии привлечения
           </p>
         </div>
 
-        {/* Grid of 11 methods */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10 fade-up" data-delay="0.15">
           {methods.map((m) => (
-            <div key={m.num} className="glass-card rounded-2xl p-6 card-hover group">
+            <div key={m.num} className="rounded-2xl p-6 card-hover group" style={{ background: 'rgba(255,255,255,0.8)', border: '1px solid #e5e7eb', backdropFilter: 'blur(10px)' }}>
               <div className="flex items-start gap-3">
-                <span className="text-[#1E9BF0] font-black text-lg shrink-0 opacity-60 group-hover:opacity-100 transition-opacity">{m.num}/</span>
+                <span className="font-black text-lg shrink-0" style={{ color: '#1E9BF0' }}>{m.num}/</span>
                 <div>
-                  <h4 className="font-bold text-gray-900 mb-1 text-sm">{m.title}</h4>
-                  <p className="text-gray-500 text-xs leading-relaxed">{m.desc}</p>
+                  <h4 className="font-bold mb-1 text-sm" style={{ color: '#111827' }}>{m.title}</h4>
+                  <p className="text-xs leading-relaxed" style={{ color: '#6b7280' }}>{m.desc}</p>
                 </div>
               </div>
             </div>
           ))}
 
           {/* Result card */}
-          <div className="lavender-card p-6 flex items-center">
+          <div className="rounded-2xl p-6 flex items-center" style={{ background: 'linear-gradient(135deg, #E8EEFF 0%, #D4D4FF 100%)' }}>
             <div>
               <span className="pill-badge pill-badge-dark text-xs mb-2 inline-block">Главный результат</span>
-              <p className="text-sm font-bold text-gray-900 leading-relaxed">
+              <p className="text-sm font-bold leading-relaxed" style={{ color: '#1e1b4b' }}>
                 Все 11 методов работают на одну цель — привести платежеспособных подписчиков и лидов в ваш бизнес
               </p>
             </div>

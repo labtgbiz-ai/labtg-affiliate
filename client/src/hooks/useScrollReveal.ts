@@ -94,9 +94,10 @@ export function useCountUp(end: number, duration = 2000, start = 0) {
 }
 
 /**
- * New robust hook for company landing page.
- * Hides elements via JS on mount, then reveals on intersection.
- * Safety net: if observer never fires within 3s, elements become visible anyway.
+ * Company landing reveal hook.
+ * IMPORTANT: Elements are ALWAYS visible (no JS opacity:0).
+ * Animation is purely additive via CSS class 'animate-in'.
+ * This guarantees content is never hidden regardless of observer timing.
  */
 export function useCompanyReveal() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -105,52 +106,26 @@ export function useCompanyReveal() {
     const section = sectionRef.current;
     if (!section) return;
 
+    // DO NOT set opacity:0 on elements — they stay visible always.
+    // Just add animate-in class for the CSS slide-up effect when intersecting.
     const els = section.querySelectorAll('.fade-up');
-    const readyEls: HTMLElement[] = [];
-
-    els.forEach((el) => {
-      const htmlEl = el as HTMLElement;
-      if (!htmlEl.classList.contains('animate-in')) {
-        htmlEl.style.opacity = '0';
-        htmlEl.style.transform = 'translateY(24px)';
-        readyEls.push(htmlEl);
-      }
-    });
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const htmlEl = entry.target as HTMLElement;
-            const delay = htmlEl.dataset.delay || '0';
-            htmlEl.style.transition = `opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`;
-            htmlEl.style.opacity = '1';
-            htmlEl.style.transform = 'translateY(0)';
-            htmlEl.classList.add('animate-in');
-            observer.unobserve(htmlEl);
+            entry.target.classList.add('animate-in');
+            observer.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.02, rootMargin: '50px 0px -2% 0px' }
     );
 
-    readyEls.forEach((el) => observer.observe(el));
-
-    // Safety net: force-show any still-hidden elements after 2.5s
-    const safetyTimeout = setTimeout(() => {
-      readyEls.forEach((el) => {
-        if (!el.classList.contains('animate-in')) {
-          el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-          el.classList.add('animate-in');
-        }
-      });
-    }, 2500);
+    els.forEach((el) => observer.observe(el));
 
     return () => {
       observer.disconnect();
-      clearTimeout(safetyTimeout);
     };
   }, []);
 

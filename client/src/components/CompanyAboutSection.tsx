@@ -1,65 +1,63 @@
-/* LabTG Company Landing — About Section
-   Design: Glassmorphism cards with gradient backgrounds
-*/
 import { useCompanyReveal } from '@/hooks/useScrollReveal';
+
+const stats = [
+  { value: '100+', label: 'успешных проектов' },
+  { value: '3', label: 'года на рынке' },
+  { value: '100M+', label: 'рублей бюджета' },
+  { value: '3', label: 'рынка: RU, СНГ, EU' },
+];
+
+const points = [
+  { title: 'Полный цикл', desc: 'От стратегии и контента до автоматизации продаж и аналитики — всё под ключ' },
+  { title: 'AI-технологии', desc: 'Используем собственные AI-инструменты, недоступные другим агентствам' },
+  { title: 'Результат', desc: 'Работаем за результат: лиды, подписчики, продажи — не просто «охваты»' },
+  { title: 'Экспертиза', desc: 'Команда с опытом в политтехнологиях, IT-продуктах и digital-маркетинге' },
+];
 
 export default function CompanyAboutSection() {
   const sectionRef = useCompanyReveal();
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-32 bg-white relative overflow-hidden" id="about">
-      {/* Background blobs */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-100 rounded-full blur-3xl opacity-20" />
-      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-purple-100 rounded-full blur-3xl opacity-20" />
+    <section ref={sectionRef} id="about" className="py-20 md:py-32 relative overflow-hidden" style={{ background: '#ffffff' }}>
+      <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl" style={{ background: '#bfdbfe', opacity: 0.2, position: 'absolute' }} />
+      <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full blur-3xl" style={{ background: '#e9d5ff', opacity: 0.2, position: 'absolute' }} />
 
       <div className="container relative z-10">
-        {/* Section header */}
-        <div className="mb-16 text-center fade-up">
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-            Кто мы
+        <div className="text-center mb-14 fade-up">
+          <span className="pill-badge pill-badge-blue text-sm mb-4 inline-block">О компании</span>
+          <h2 className="text-3xl md:text-5xl font-black mb-4" style={{ color: '#111827' }}>
+            Кто мы такие
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            LabTG — продюсерский центр полного цикла, команда экспертов по маркетингу и IT
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: '#6b7280' }}>
+            LabTG — агентство полного цикла маркетинга в Telegram. Мы не просто ведём каналы — мы строим системы привлечения клиентов.
           </p>
         </div>
 
-        {/* Main content grid */}
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
-          {/* Left: Description */}
-          <div className="fade-up" data-delay="0.1">
-            <div className="brand-card p-8 md:p-10 space-y-6">
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-4">Что мы делаем</h3>
-                <p className="text-white/90 text-lg leading-relaxed">
-                  Мы помогаем предпринимателям, экспертам и брендам запускать, упаковывать и масштабировать бизнес через Telegram «под ключ».
-                </p>
-              </div>
-              
-              <div className="pt-4 border-t border-white/20">
-                <p className="text-white/80 text-sm mb-2">Главный результат:</p>
-                <p className="text-white font-bold text-xl">
-                  Превращаем подписчиков в платежеспособных клиентов всего за 1 клик.
-                </p>
-              </div>
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14 fade-up" data-delay="0.1">
+          {stats.map((s) => (
+            <div key={s.label} className="rounded-2xl p-6 text-center" style={{ background: 'linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%)', border: '1px solid #dbeafe' }}>
+              <div className="text-3xl font-black mb-1" style={{ color: '#1E9BF0' }}>{s.value}</div>
+              <div className="text-sm font-medium" style={{ color: '#374151' }}>{s.label}</div>
             </div>
-          </div>
+          ))}
+        </div>
 
-          {/* Right: Stats/Benefits */}
-          <div className="fade-up" data-delay="0.2">
-            <div className="space-y-4">
-              {[
-                { title: 'Полный цикл', desc: 'От стратегии до автоматизации' },
-                { title: 'Экспертная команда', desc: 'Маркетинг, IT и продакшн' },
-                { title: 'Результат-ориентированно', desc: 'Максимум ROI на каждый рубль' },
-                { title: 'Telegram-фокус', desc: 'Все инструменты в одной платформе' },
-              ].map((item, i) => (
-                <div key={i} className="glass-card p-6 rounded-2xl hover:shadow-lg transition-all duration-300 card-hover">
-                  <h4 className="font-bold text-gray-900 mb-2">{item.title}</h4>
-                  <p className="text-gray-600 text-sm">{item.desc}</p>
-                </div>
-              ))}
+        {/* Points */}
+        <div className="grid md:grid-cols-2 gap-5 fade-up" data-delay="0.2">
+          {points.map((p, i) => (
+            <div key={i} className="rounded-2xl p-6 flex gap-4 items-start card-hover" style={{ background: '#f9fafb', border: '1px solid #e5e7eb' }}>
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'linear-gradient(135deg, #1E9BF0, #6366f1)' }}>
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h4 className="font-bold mb-1" style={{ color: '#111827' }}>{p.title}</h4>
+                <p className="text-sm leading-relaxed" style={{ color: '#6b7280' }}>{p.desc}</p>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
