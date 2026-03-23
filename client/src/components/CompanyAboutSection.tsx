@@ -11,17 +11,16 @@ export default function CompanyAboutSection() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+            entry.target.classList.add('animate-in');
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    const els = sectionRef.current?.querySelectorAll('.fade-up');
+    els?.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);
@@ -29,12 +28,12 @@ export default function CompanyAboutSection() {
   return (
     <section ref={sectionRef} className="py-20 md:py-32 bg-white relative overflow-hidden" id="about">
       {/* Background blobs */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-100 rounded-full blur-3xl opacity-20 -z-10" />
-      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-purple-100 rounded-full blur-3xl opacity-20 -z-10" />
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-100 rounded-full blur-3xl opacity-20" />
+      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-purple-100 rounded-full blur-3xl opacity-20" />
 
-      <div className="container">
+      <div className="container relative z-10">
         {/* Section header */}
-        <div className="mb-16 text-center reveal" data-initial="false">
+        <div className="mb-16 text-center fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
             Кто мы
           </h2>
@@ -46,7 +45,7 @@ export default function CompanyAboutSection() {
         {/* Main content grid */}
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Left: Description */}
-          <div className="reveal" data-initial="false">
+          <div className="fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s' }}>
             <div className="brand-card p-8 md:p-10 space-y-6">
               <div>
                 <h3 className="text-2xl font-bold text-white mb-4">Что мы делаем</h3>
@@ -65,7 +64,7 @@ export default function CompanyAboutSection() {
           </div>
 
           {/* Right: Stats/Benefits */}
-          <div className="reveal" data-initial="false">
+          <div className="fade-up" style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s' }}>
             <div className="space-y-4">
               {[
                 { title: 'Полный цикл', desc: 'От стратегии до автоматизации' },
@@ -73,7 +72,7 @@ export default function CompanyAboutSection() {
                 { title: 'Результат-ориентированно', desc: 'Максимум ROI на каждый рубль' },
                 { title: 'Telegram-фокус', desc: 'Все инструменты в одной платформе' },
               ].map((item, i) => (
-                <div key={i} className="glass-card p-6 rounded-2xl hover:shadow-lg transition-all duration-300">
+                <div key={i} className="glass-card p-6 rounded-2xl hover:shadow-lg transition-all duration-300 card-hover">
                   <h4 className="font-bold text-gray-900 mb-2">{item.title}</h4>
                   <p className="text-gray-600 text-sm">{item.desc}</p>
                 </div>
