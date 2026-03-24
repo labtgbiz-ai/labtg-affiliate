@@ -39,3 +39,9 @@
 - [x] Add: Favicon from LabTG logo (blue background with white icon) to index.html
 - [x] Add: Telegram bot integration for main site contact form (CompanyContactSection)
 - [x] Add: tRPC contact.submitForm endpoint connected to Telegram bot
+- [x] Set up react-i18next with browser language auto-detection
+- [x] Create translation files: RU (base), EN, ES, UZ
+- [x] Integrate i18n into all CompanyHome components
+- [x] Add language switcher to CompanyNavbar
+- [x] Audit and fix mobile/tablet responsive issues across all sections
+- [x] Test on mobile, tablet, desktop breakpoints

@@ -1,21 +1,23 @@
+import { useTranslation } from 'react-i18next';
 import { useCompanyReveal } from '@/hooks/useScrollReveal';
 
-const methods = [
-  { num: '01', title: 'Telegram Ads', desc: 'Официальная таргетированная реклама в Telegram' },
-  { num: '02', title: 'Посевы в каналах', desc: 'Прямые размещения в рекламных Telegram-каналах с маркировкой или без' },
-  { num: '03', title: 'Нейрокомментинг', desc: 'Нативные комментарии к постам публичных каналов с помощью AI' },
-  { num: '04', title: 'Коллаборации', desc: 'Нативные интеграции с блогерами и авторскими каналами' },
-  { num: '05', title: 'Реферальная система', desc: 'Существующие подписчики привлекают новых за вознаграждение' },
-  { num: '06', title: 'Рассылки по базам', desc: 'Массовые целевые диалоги с полезной информацией (не спам)' },
-  { num: '07', title: 'Массовая аудитория из соцсетей', desc: 'Целевая аудитория для увеличения медийности канала' },
-  { num: '08', title: 'AI-видеоконтент', desc: 'Говорящие головы и полноростовые модели для привлечения из соцсетей' },
-  { num: '09', title: 'Яндекс.Директ', desc: 'Контекстная реклама — показы в момент, когда ищут ваш товар или услугу' },
-  { num: '10', title: 'Яндекс.Карты', desc: 'Повышение репутации — метка «Хорошее место» (органический трафик)' },
-  { num: '11', title: 'Авито', desc: 'AI-отзывы для увеличения рейтинга и видимости объявлений' },
-];
-
 export default function LeadAttractionSection() {
+  const { t } = useTranslation();
   const sectionRef = useCompanyReveal();
+
+  const methods = [
+    { num: '01', title: t('leadAttraction.m1Title'), desc: t('leadAttraction.m1Desc') },
+    { num: '02', title: t('leadAttraction.m2Title'), desc: t('leadAttraction.m2Desc') },
+    { num: '03', title: t('leadAttraction.m3Title'), desc: t('leadAttraction.m3Desc') },
+    { num: '04', title: t('leadAttraction.m4Title'), desc: t('leadAttraction.m4Desc') },
+    { num: '05', title: t('leadAttraction.m5Title'), desc: t('leadAttraction.m5Desc') },
+    { num: '06', title: t('leadAttraction.m6Title'), desc: t('leadAttraction.m6Desc') },
+    { num: '07', title: t('leadAttraction.m7Title'), desc: t('leadAttraction.m7Desc') },
+    { num: '08', title: t('leadAttraction.m8Title'), desc: t('leadAttraction.m8Desc') },
+    { num: '09', title: t('leadAttraction.m9Title'), desc: t('leadAttraction.m9Desc') },
+    { num: '10', title: t('leadAttraction.m10Title'), desc: t('leadAttraction.m10Desc') },
+    { num: '11', title: t('leadAttraction.m11Title'), desc: t('leadAttraction.m11Desc') },
+  ];
 
   return (
     <section ref={sectionRef} id="lead-attraction" className="py-20 md:py-32 relative overflow-hidden" style={{ background: '#ffffff' }}>
@@ -23,14 +25,14 @@ export default function LeadAttractionSection() {
 
       <div className="container relative z-10">
         <div className="text-center mb-14 fade-up">
-          <span className="pill-badge pill-badge-light text-sm mb-4 inline-block">04 / Привлечение</span>
+          <span className="pill-badge pill-badge-light text-sm mb-4 inline-block">{t('leadAttraction.sectionLabel')}</span>
           <h2 className="text-3xl md:text-5xl font-black mb-4" style={{ color: '#111827' }}>
-            11 способов привлечения{' '}
+            {t('leadAttraction.title')}{' '}
             <br className="hidden md:block" />
-            <span className="gradient-text">целевых подписчиков и лидов</span>
+            <span className="gradient-text">{t('leadAttraction.titleHighlight')}</span>
           </h2>
           <p className="text-lg max-w-2xl mx-auto" style={{ color: '#6b7280' }}>
-            Без аудитории нет продаж. Используем самые эффективные технологии привлечения
+            {t('leadAttraction.subtitle')}
           </p>
         </div>
 
@@ -50,9 +52,9 @@ export default function LeadAttractionSection() {
           {/* Result card */}
           <div className="rounded-2xl p-6 flex items-center" style={{ background: 'linear-gradient(135deg, #E8EEFF 0%, #D4D4FF 100%)' }}>
             <div>
-              <span className="pill-badge pill-badge-dark text-xs mb-2 inline-block">Главный результат</span>
+              <span className="pill-badge pill-badge-dark text-xs mb-2 inline-block">{t('leadAttraction.resultLabel')}</span>
               <p className="text-sm font-bold leading-relaxed" style={{ color: '#1e1b4b' }}>
-                Все 11 методов работают на одну цель — привести платежеспособных подписчиков и лидов в ваш бизнес
+                {t('leadAttraction.resultText')}
               </p>
             </div>
           </div>

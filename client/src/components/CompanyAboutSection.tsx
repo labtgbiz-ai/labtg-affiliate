@@ -1,21 +1,23 @@
+import { useTranslation } from 'react-i18next';
 import { useCompanyReveal } from '@/hooks/useScrollReveal';
 
-const stats = [
-  { value: '100+', label: 'успешных проектов' },
-  { value: '3', label: 'года на рынке' },
-  { value: '100M+', label: 'рублей бюджета' },
-  { value: '3', label: 'рынка: RU, СНГ, EU' },
-];
-
-const points = [
-  { title: 'Полный цикл', desc: 'От стратегии и контента до автоматизации продаж и аналитики — всё под ключ' },
-  { title: 'AI-технологии', desc: 'Используем собственные AI-инструменты, недоступные другим агентствам' },
-  { title: 'Результат', desc: 'Работаем за результат: лиды, подписчики, продажи — не просто «охваты»' },
-  { title: 'Экспертиза', desc: 'Команда с опытом в политтехнологиях, IT-продуктах и digital-маркетинге' },
-];
-
 export default function CompanyAboutSection() {
+  const { t } = useTranslation();
   const sectionRef = useCompanyReveal();
+
+  const stats = [
+    { value: t('about.stat1Value'), label: t('about.stat1Label') },
+    { value: t('about.stat2Value'), label: t('about.stat2Label') },
+    { value: t('about.stat3Value'), label: t('about.stat3Label') },
+    { value: t('about.stat4Value'), label: t('about.stat4Label') },
+  ];
+
+  const points = [
+    { title: t('about.feature1Title'), desc: t('about.feature1Desc') },
+    { title: t('about.feature2Title'), desc: t('about.feature2Desc') },
+    { title: t('about.feature3Title'), desc: t('about.feature3Desc') },
+    { title: t('about.feature4Title'), desc: t('about.feature4Desc') },
+  ];
 
   return (
     <section ref={sectionRef} id="about" className="py-20 md:py-32 relative overflow-hidden" style={{ background: '#ffffff' }}>
@@ -24,12 +26,12 @@ export default function CompanyAboutSection() {
 
       <div className="container relative z-10">
         <div className="text-center mb-14 fade-up">
-          <span className="pill-badge pill-badge-blue text-sm mb-4 inline-block">О компании</span>
+          <span className="pill-badge pill-badge-blue text-sm mb-4 inline-block">{t('about.sectionLabel')}</span>
           <h2 className="text-3xl md:text-5xl font-black mb-4" style={{ color: '#111827' }}>
-            Кто мы такие
+            {t('about.title')}
           </h2>
           <p className="text-lg max-w-2xl mx-auto" style={{ color: '#6b7280' }}>
-            LabTG — агентство полного цикла маркетинга в Telegram. Мы не просто ведём каналы — мы строим системы привлечения клиентов.
+            {t('about.description')}
           </p>
         </div>
 

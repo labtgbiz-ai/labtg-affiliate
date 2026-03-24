@@ -1,14 +1,16 @@
+import { useTranslation } from 'react-i18next';
 import { useCompanyReveal } from '@/hooks/useScrollReveal';
 
-const items = [
-  { icon: '📋', title: 'Контент-стратегия', desc: 'Разработка контент-стратегии и ведение канала' },
-  { icon: '🎬', title: 'Медиа-контент', desc: 'Еженедельные ТЗ по медиа-контенту' },
-  { icon: '🎓', title: 'Обучение', desc: 'Обучение владельца Telegram-канала созданию медиаконтента' },
-  { icon: '🤖', title: 'AI-видеоролики', desc: 'Создание цифровых AI-видеороликов и видеоподкастов для соцсетей' },
-];
-
 export default function ContentSection() {
+  const { t } = useTranslation();
   const sectionRef = useCompanyReveal();
+
+  const items = [
+    { icon: '📋', title: t('content.i1Title'), desc: t('content.i1Desc') },
+    { icon: '🎬', title: t('content.i2Title'), desc: t('content.i2Desc') },
+    { icon: '🎓', title: t('content.i3Title'), desc: t('content.i3Desc') },
+    { icon: '🤖', title: t('content.i4Title'), desc: t('content.i4Desc') },
+  ];
 
   return (
     <section ref={sectionRef} className="py-20 md:py-28 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f0f7ff 50%, #ffffff 100%)' }}>
@@ -16,12 +18,12 @@ export default function ContentSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left */}
           <div className="fade-up">
-            <span className="pill-badge pill-badge-light text-sm mb-4 inline-block">05 / Контент</span>
+            <span className="pill-badge pill-badge-light text-sm mb-4 inline-block">{t('content.sectionLabel')}</span>
             <h2 className="text-3xl md:text-4xl font-black mb-4" style={{ color: '#111827' }}>
-              Контент и вовлечение
+              {t('content.title')}
             </h2>
             <p className="text-lg mb-8 leading-relaxed" style={{ color: '#6b7280' }}>
-              Чтобы аудитория оставалась активной, нужен продуманный и качественный контент
+              {t('content.subtitle')}
             </p>
 
             <div className="space-y-4">
@@ -40,18 +42,18 @@ export default function ContentSection() {
           {/* Right — Key result */}
           <div className="fade-up" data-delay="0.15">
             <div className="rounded-2xl p-10 md:p-12 text-center" style={{ background: 'linear-gradient(135deg, #E8EEFF 0%, #D4D4FF 100%)' }}>
-              <span className="pill-badge pill-badge-dark text-xs mb-6 inline-block">Ключевой результат</span>
+              <span className="pill-badge pill-badge-dark text-xs mb-6 inline-block">{t('content.resultLabel')}</span>
               <p className="text-xl md:text-2xl font-black leading-snug" style={{ color: '#1e1b4b' }}>
-                Системный контент = постоянный контакт с аудиторией = стабильные продажи
+                {t('content.resultText')}
               </p>
               <div className="mt-8 grid grid-cols-2 gap-4">
                 <div className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.7)' }}>
-                  <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Прогрев аккаунтов</p>
-                  <p className="font-bold text-sm" style={{ color: '#111827' }}>Получение охватов</p>
+                  <p className="text-xs mb-1" style={{ color: '#6b7280' }}>{t('content.r1Label')}</p>
+                  <p className="font-bold text-sm" style={{ color: '#111827' }}>{t('content.r1Value')}</p>
                 </div>
                 <div className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.7)' }}>
-                  <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Развитие медийности</p>
-                  <p className="font-bold text-sm" style={{ color: '#111827' }}>Рост доверия к бренду</p>
+                  <p className="text-xs mb-1" style={{ color: '#6b7280' }}>{t('content.r2Label')}</p>
+                  <p className="font-bold text-sm" style={{ color: '#111827' }}>{t('content.r2Value')}</p>
                 </div>
               </div>
             </div>

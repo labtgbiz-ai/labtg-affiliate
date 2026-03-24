@@ -1,11 +1,13 @@
 /* LabTG Company Landing — Hero Section
-   Design: Full-screen, gradient mesh blobs, 3D Telegram crystal, asymmetric layout
+   Design: Full-screen, gradient mesh blobs, 3D Telegram crystal, asymmetric layout, i18n
 */
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const HERO_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663458361072/CLC9CvFw6EzBzRUxKGTfc6/hero-3d-telegram-SURwPLygaKnTXXRSpeqSi2.webp';
 
 export default function CompanyHeroSection() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -22,8 +24,14 @@ export default function CompanyHeroSection() {
     });
   }, []);
 
+  const stats = [
+    { value: t('hero.stat1Value'), label: t('hero.stat1Label') },
+    { value: t('hero.stat2Value'), label: t('hero.stat2Label') },
+    { value: t('hero.stat3Value'), label: t('hero.stat3Label') },
+  ];
+
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden bg-white pt-20">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden bg-white pt-20" style={{overflowX: 'hidden'}}>
       {/* Gradient mesh blobs */}
       <div className="blob animate-blob w-[600px] h-[600px] bg-blue-200/60 top-[-100px] right-[-100px]" style={{ position: 'absolute' }} />
       <div className="blob animate-blob-delay w-[500px] h-[500px] bg-purple-200/40 bottom-[-50px] left-[-100px]" style={{ position: 'absolute' }} />
@@ -36,31 +44,28 @@ export default function CompanyHeroSection() {
             {/* Badge */}
             <div className="hero-animate">
               <span className="pill-badge pill-badge-blue text-sm shadow-lg shadow-blue-500/20">
-                Продюсерский центр
+                {t('hero.badge')}
               </span>
             </div>
 
             {/* Headline */}
             <div className="hero-animate">
               <h1 className="font-['Raleway'] font-black text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl text-gray-900 leading-[1.08] tracking-tight">
-                Маркетинг{' '}
-                <span className="gradient-text">«под ключ»</span>,{' '}
-                AI-агенты и целевые лиды в Telegram
+                {t('hero.title1')}{' '}
+                <span className="gradient-text">{t('hero.title2')}</span>
+                {t('hero.title3')}{' '}
+                {t('hero.title4')}
               </h1>
             </div>
 
             {/* Sub */}
             <p className="hero-animate text-base md:text-lg text-gray-500 leading-relaxed max-w-lg">
-              Полный цикл маркетинга и продаж для вашего бизнеса. От стратегии до автоматизации — всё в Telegram.
+              {t('hero.subtitle')}
             </p>
 
             {/* Stats row */}
             <div className="hero-animate flex flex-wrap gap-8">
-              {[
-                { value: '100%', label: 'под ключ' },
-                { value: '24/7', label: 'автоматизация' },
-                { value: '∞', label: 'масштабируемость' },
-              ].map((stat) => (
+              {stats.map((stat) => (
                 <div key={stat.label} className="flex flex-col">
                   <span className="font-['Raleway'] font-black text-2xl md:text-3xl text-[#1E9BF0]">{stat.value}</span>
                   <span className="text-xs md:text-sm text-gray-400 font-medium mt-0.5">{stat.label}</span>
@@ -71,10 +76,10 @@ export default function CompanyHeroSection() {
             {/* CTA buttons */}
             <div className="hero-animate flex flex-col sm:flex-row gap-3 pt-2">
               <a href="#contact" className="btn-gradient text-center text-base px-8 py-4 animate-pulse-glow shadow-xl shadow-blue-500/25">
-                Обсудить проект →
+                {t('hero.ctaPrimary')}
               </a>
               <a href="#services" className="btn-outline text-center text-base px-8 py-4 border-2 border-[#1E9BF0] text-[#1E9BF0] rounded-full font-semibold hover:bg-blue-50 transition-colors">
-                Узнать больше
+                {t('hero.ctaSecondary')}
               </a>
             </div>
           </div>
@@ -82,7 +87,6 @@ export default function CompanyHeroSection() {
           {/* Right: Image */}
           <div className="hero-animate relative hidden lg:flex items-center justify-center">
             <div className="relative">
-              {/* Subtle glow behind image */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/10 rounded-full blur-3xl scale-110" />
               <img
                 src={HERO_IMG}

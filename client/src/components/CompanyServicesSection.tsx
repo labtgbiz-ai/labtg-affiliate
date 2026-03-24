@@ -1,42 +1,44 @@
+import { useTranslation } from 'react-i18next';
 import { useCompanyReveal } from '@/hooks/useScrollReveal';
 
-const services = [
-  {
-    num: '01',
-    title: 'Проработка unit-экономики и стратегия',
-    desc: 'Не навязываем инструменты, пока не понимаем экономику проекта. Считаем стоимость клиента, лида и подписчика, анализируем планы по продажам и конверсии.',
-    features: ['Анализ unit-экономики', 'Подбор каналов привлечения', 'Маркетинговая стратегия', 'Максимум ROI на рубль'],
-    dark: true,
-  },
-  {
-    num: '02',
-    title: 'Упаковка и презентация',
-    desc: 'Создаём продающий профиль, канал или чат, который вызывает доверие. Дизайн, название, описание, навигационный пост — всё, что видит пользователь в первые 3 секунды.',
-    features: ['Концепция Telegram-канала', 'Дизайн аватарки и профиля', 'Разработка названия', 'Навигационный пост'],
-    dark: false,
-  },
-  {
-    num: '03',
-    title: 'Автоматизация маркетинга и продаж',
-    desc: 'Чат-боты, воронки, AI-агенты и сквозная аналитика. Полная автоматизация 24/7 — от первого касания до закрытия сделки.',
-    features: ['Воронки и автоворонки', 'Рассылки по базе', 'Реферальная система', 'Сквозная аналитика'],
-    dark: true,
-  },
-];
-
 export default function CompanyServicesSection() {
+  const { t } = useTranslation();
   const sectionRef = useCompanyReveal();
+
+  const services = [
+    {
+      num: t('services.s1Label'),
+      title: t('services.s1Title'),
+      desc: t('services.s1Desc'),
+      features: [t('services.s1f1'), t('services.s1f2'), t('services.s1f3'), t('services.s1f4')],
+      dark: true,
+    },
+    {
+      num: t('services.s2Label'),
+      title: t('services.s2Title'),
+      desc: t('services.s2Desc'),
+      features: [t('services.s2f1'), t('services.s2f2'), t('services.s2f3'), t('services.s2f4')],
+      dark: false,
+    },
+    {
+      num: t('services.s3Label'),
+      title: t('services.s3Title'),
+      desc: t('services.s3Desc'),
+      features: [t('services.s3f1'), t('services.s3f2'), t('services.s3f3'), t('services.s3f4')],
+      dark: true,
+    },
+  ];
 
   return (
     <section ref={sectionRef} id="services" className="py-20 md:py-32 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #f8faff 0%, #ffffff 100%)' }}>
       <div className="container relative z-10">
         <div className="text-center mb-14 fade-up">
-          <span className="pill-badge pill-badge-blue text-sm mb-4 inline-block">Наши услуги</span>
+          <span className="pill-badge pill-badge-blue text-sm mb-4 inline-block">{t('services.sectionLabel')}</span>
           <h2 className="text-3xl md:text-5xl font-black mb-4" style={{ color: '#111827' }}>
-            Комплексный подход
+            {t('services.title')}
           </h2>
           <p className="text-lg max-w-2xl mx-auto" style={{ color: '#6b7280' }}>
-            Три ключевых направления для максимального результата в Telegram
+            {t('services.subtitle')}
           </p>
         </div>
 

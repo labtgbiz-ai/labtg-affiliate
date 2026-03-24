@@ -1,13 +1,14 @@
 /* LabTG Company Landing — Footer
-   Design: Dark footer with high contrast text, company info, links and partner program
+   Design: Dark footer with high contrast text, company info, links and partner program, i18n
 */
+import { useTranslation } from 'react-i18next';
 
 export default function CompanyFooter() {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="relative overflow-hidden" style={{ background: '#0D1117', color: '#ffffff' }}>
-      {/* Subtle gradient accent */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1E9BF0]/40 to-transparent" />
 
       <div className="container py-16 md:py-20">
@@ -18,19 +19,18 @@ export default function CompanyFooter() {
               <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663458361072/CLC9CvFw6EzBzRUxKGTfc6/логотип_1_a8a68d00.png" alt="LabTG" className="h-10 w-auto" />
               <div>
                 <span className="font-['Raleway'] font-black text-lg tracking-tight" style={{ color: '#ffffff' }}>LabTG</span>
-                <span className="block text-[10px] font-medium" style={{ color: '#9CA3AF' }}>Продюсерский центр</span>
+                <span className="block text-[10px] font-medium" style={{ color: '#9CA3AF' }}>{t('footer.tagline')}</span>
               </div>
             </div>
             <p className="text-sm leading-relaxed mb-6" style={{ color: '#D1D5DB' }}>
-              Продюсерский центр полного цикла для развития вашего бизнеса в Telegram.
+              {t('footer.description')}
             </p>
-            {/* Partner program CTA */}
             <a
               href="/partners"
               className="inline-flex items-center gap-2 text-sm font-semibold transition-colors group"
               style={{ color: '#1E9BF0' }}
             >
-              <span>Партнёрская программа</span>
+              <span>{t('footer.affiliateProgram')}</span>
               <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
@@ -39,31 +39,31 @@ export default function CompanyFooter() {
 
           {/* Services */}
           <div>
-            <h4 className="font-bold mb-4 text-sm uppercase tracking-wider" style={{ color: '#ffffff' }}>Услуги</h4>
+            <h4 className="font-bold mb-4 text-sm uppercase tracking-wider" style={{ color: '#ffffff' }}>{t('footer.services')}</h4>
             <ul className="space-y-2.5 text-sm" style={{ color: '#D1D5DB' }}>
-              <li><a href="#services" className="hover:text-white transition-colors">Unit-экономика</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Упаковка & Дизайн</a></li>
-              <li><a href="#ai-agent" className="hover:text-white transition-colors">AI-лид-агент</a></li>
-              <li><a href="#lead-attraction" className="hover:text-white transition-colors">Привлечение лидов</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Автоматизация</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">{t('footer.unitEcon')}</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">{t('footer.packaging')}</a></li>
+              <li><a href="#ai-agent" className="hover:text-white transition-colors">{t('footer.aiAgent')}</a></li>
+              <li><a href="#lead-attraction" className="hover:text-white transition-colors">{t('footer.leadAttraction')}</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">{t('footer.automation')}</a></li>
             </ul>
           </div>
 
           {/* Company */}
           <div>
-            <h4 className="font-bold mb-4 text-sm uppercase tracking-wider" style={{ color: '#ffffff' }}>Компания</h4>
+            <h4 className="font-bold mb-4 text-sm uppercase tracking-wider" style={{ color: '#ffffff' }}>{t('footer.company')}</h4>
             <ul className="space-y-2.5 text-sm" style={{ color: '#D1D5DB' }}>
-              <li><a href="#about" className="hover:text-white transition-colors">О нас</a></li>
-              <li><a href="#team" className="hover:text-white transition-colors">Команда</a></li>
-              <li><a href="#principles" className="hover:text-white transition-colors">Принципы</a></li>
-              <li><a href="#cases" className="hover:text-white transition-colors">Кейсы</a></li>
-              <li><a href="/partners" className="hover:text-white transition-colors">Партнёрам</a></li>
+              <li><a href="#about" className="hover:text-white transition-colors">{t('footer.aboutUs')}</a></li>
+              <li><a href="#team" className="hover:text-white transition-colors">{t('footer.teamLink')}</a></li>
+              <li><a href="#principles" className="hover:text-white transition-colors">{t('footer.principles')}</a></li>
+              <li><a href="#cases" className="hover:text-white transition-colors">{t('footer.cases')}</a></li>
+              <li><a href="/partners" className="hover:text-white transition-colors">{t('footer.partners')}</a></li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h4 className="font-bold mb-4 text-sm uppercase tracking-wider" style={{ color: '#ffffff' }}>Контакты</h4>
+            <h4 className="font-bold mb-4 text-sm uppercase tracking-wider" style={{ color: '#ffffff' }}>{t('nav.contacts')}</h4>
             <ul className="space-y-2.5 text-sm" style={{ color: '#D1D5DB' }}>
               <li>
                 <a href="https://t.me/labtg_manager" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-2">
@@ -85,13 +85,12 @@ export default function CompanyFooter() {
           </div>
         </div>
 
-        {/* Divider */}
         <div className="pt-8" style={{ borderTop: '1px solid #1f2937' }}>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm" style={{ color: '#9CA3AF' }}>
-            <p>&copy; {currentYear} LabTG. Все права защищены.</p>
+            <p>&copy; {currentYear} LabTG. {t('footer.rights')}</p>
             <div className="flex gap-6">
-              <a href="#" className="hover:text-gray-300 transition-colors">Политика конфиденциальности</a>
-              <a href="#" className="hover:text-gray-300 transition-colors">Условия использования</a>
+              <a href="#" className="hover:text-gray-300 transition-colors">{t('footer.privacy')}</a>
+              <a href="#" className="hover:text-gray-300 transition-colors">{t('footer.terms')}</a>
             </div>
           </div>
         </div>
