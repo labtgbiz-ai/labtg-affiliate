@@ -9,10 +9,14 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2.5 mb-4">
-              <img src="https://cdn.manus.im/webdev/labtg-logo.png" alt="LabTG" className="h-10 w-auto" />
+              <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663458361072/CLC9CvFw6EzBzRUxKGTfc6/логотип_1_a8a68d00.png" alt="LabTG" className="h-10 w-auto" />
+              <div>
+                <span className="font-['Raleway'] font-black text-lg tracking-tight text-gray-900">LabTG</span>
+                <span className="block text-[10px] font-medium text-gray-400">Партнёрская программа</span>
+              </div>
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Продюсерский центр полного цикла. Маркетинг «под ключ», AI-агенты и целевые лиды в Telegram.
+              Партнёрская программа продюсерского центра LabTG. Зарабатывайте на рекомендациях AI-маркетинга.
             </p>
             <div className="flex items-center gap-1.5 mt-3">
               <div className="w-2 h-2 rounded-full bg-green-500" />

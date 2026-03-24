@@ -17,6 +17,18 @@ export default function Home() {
   // The userAuth hooks provides authentication state
   let { user, loading, error, isAuthenticated, logout } = useAuth();
 
+  // Set page title and meta for partners page
+  useEffect(() => {
+    document.title = 'LabTG — партнёрская программа';
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', 'LabTG — партнёрская программа. Зарабатывайте 7% с прямых продаж и 4% с рекомендаций. Партнёрская сеть продюсерского центра LabTG.');
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', 'LabTG — партнёрская программа');
+    return () => {
+      document.title = 'LabTG — продюсерский центр';
+    };
+  }, []);
+
   // Initialize scroll reveal for all .reveal elements
   useEffect(() => {
     const observer = new IntersectionObserver(

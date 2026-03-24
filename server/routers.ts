@@ -2,7 +2,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
-import { sendPartnerFormToTelegram, isValidTelegramUsername } from "./telegram";
+import { sendPartnerFormToTelegram, sendContactFormToTelegram, isValidTelegramUsername } from "./telegram";
 import { z } from "zod";
 
 export const appRouter = router({
@@ -17,6 +17,41 @@ export const appRouter = router({
         success: true,
       } as const;
     }),
+  }),
+
+  contact: router({
+    submitForm: publicProcedure
+      .input(
+        z.object({
+          name: z.string().min(2, "Имя должно быть минимум 2 символа"),
+          phone: z.string().regex(/^\+?[0-9\s\-()]{10,}$/, "Некорректный номер телефона"),
+          message: z.string().optional().default(''),
+          source: z.string().optional(),
+        })
+      )
+      .mutation(async ({ input }) => {
+        try {
+          const success = await sendContactFormToTelegram({
+            name: input.name,
+            phone: input.phone,
+            message: input.message || '',
+            source: input.source,
+          });
+
+          return {
+            success,
+            message: success
+              ? "Заявка отправлена! Мы свяжемся с вами в течение 24 часов."
+              : "Ошибка отправки. Попробуйте позже или напишите в Telegram.",
+          };
+        } catch (error) {
+          console.error("[Contact] Form submission error:", error);
+          return {
+            success: false,
+            message: "Ошибка отправки. Попробуйте позже.",
+          };
+        }
+      }),
   }),
 
   partners: router({

@@ -85,7 +85,7 @@ export default function CompanyNavbar() {
             <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663458361072/CLC9CvFw6EzBzRUxKGTfc6/логотип_1_a8a68d00.png" alt="LabTG" className="h-9 md:h-10 w-auto" />
             <div>
               <span className="font-['Raleway'] font-black text-lg md:text-xl text-gray-900 tracking-tight">LabTG</span>
-              <span className="hidden sm:block text-[10px] text-gray-400 font-medium leading-none -mt-0.5">Маркетинг под ключ</span>
+              <span className="hidden sm:block text-[10px] text-gray-400 font-medium leading-none -mt-0.5">Продюсерский центр</span>
             </div>
           </a>
 

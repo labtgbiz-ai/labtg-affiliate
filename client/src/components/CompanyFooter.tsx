@@ -18,6 +18,7 @@ export default function CompanyFooter() {
               <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663458361072/CLC9CvFw6EzBzRUxKGTfc6/логотип_1_a8a68d00.png" alt="LabTG" className="h-10 w-auto" />
               <div>
                 <span className="font-['Raleway'] font-black text-lg tracking-tight" style={{ color: '#ffffff' }}>LabTG</span>
+                <span className="block text-[10px] font-medium" style={{ color: '#9CA3AF' }}>Продюсерский центр</span>
               </div>
             </div>
             <p className="text-sm leading-relaxed mb-6" style={{ color: '#D1D5DB' }}>

@@ -36,7 +36,7 @@ export default function CompanyHeroSection() {
             {/* Badge */}
             <div className="hero-animate">
               <span className="pill-badge pill-badge-blue text-sm shadow-lg shadow-blue-500/20">
-                Маркетинг под ключ
+                Продюсерский центр
               </span>
             </div>
 

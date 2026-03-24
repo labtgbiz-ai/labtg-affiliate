@@ -1,6 +1,5 @@
-/* LabTG — Team Section (Page 12 of presentation)
-   "Наша команда" — 3 co-founders with detailed achievements
-   FIX: Use inline styles for card backgrounds to guarantee dark bg + white text contrast
+/* LabTG — Team Section (Page 18 of presentation)
+   "Наша команда" — 3 co-founders with real photos from presentation
 */
 import { useCompanyReveal } from '@/hooks/useScrollReveal';
 
@@ -9,6 +8,7 @@ const team = [
     name: 'Алексей Левин',
     role: 'Основатель и CEO',
     initials: 'АЛ',
+    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663458361072/CLC9CvFw6EzBzRUxKGTfc6/alexey-levin_7627f79f.png',
     highlights: [
       { label: '3 года', desc: 'в политических технологиях' },
       { label: '5+ лет', desc: 'в продвижении в Telegram' },
@@ -24,6 +24,7 @@ const team = [
     name: 'Вадим Нижник',
     role: 'Сооснователь и COO',
     initials: 'ВН',
+    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663458361072/CLC9CvFw6EzBzRUxKGTfc6/vadim-nizhnik_2a88e512.png',
     highlights: [
       { label: '3+ лет', desc: 'в создании видеоконтента' },
       { label: '200+', desc: 'человек в управлении' },
@@ -39,6 +40,7 @@ const team = [
     name: 'Владислав Хухарев',
     role: 'Сооснователь, CPO, CVO',
     initials: 'ВХ',
+    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663458361072/CLC9CvFw6EzBzRUxKGTfc6/vladislav-khukharev_b72dc611.png',
     highlights: [
       { label: '5+ лет', desc: 'в создании IT-продуктов' },
       { label: '8+ лет', desc: 'в digital маркетинге' },
@@ -84,10 +86,19 @@ export default function TeamSection() {
                 {/* Avatar + Name */}
                 <div className="flex items-center gap-4 mb-5">
                   <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0"
-                    style={{ backgroundColor: 'rgba(255,255,255,0.25)' }}
+                    className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 flex items-center justify-center"
+                    style={{ backgroundColor: 'rgba(255,255,255,0.25)', border: '2px solid rgba(255,255,255,0.4)' }}
                   >
-                    <span className="font-black text-lg" style={{ color: '#ffffff' }}>{member.initials}</span>
+                    {member.photo ? (
+                      <img
+                        src={member.photo}
+                        alt={member.name}
+                        className="w-full h-full object-cover"
+                        style={{ objectPosition: 'center top' }}
+                      />
+                    ) : (
+                      <span className="font-black text-lg" style={{ color: '#ffffff' }}>{member.initials}</span>
+                    )}
                   </div>
                   <div>
                     <h3 className="text-xl font-black" style={{ color: '#ffffff' }}>{member.name}</h3>

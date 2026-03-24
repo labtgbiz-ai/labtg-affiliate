@@ -31,3 +31,11 @@
 - [x] Fix: /partners route not loading (was DNS propagation delay, now works)
 - [x] Performance: add code splitting - bundle split from 874KB to multiple cached chunks
 - [x] SEO: updated meta tags, OG tags, title for labtg.ru
+- [x] Add: Real case studies from presentation (HABITAT, EM Platform, Medical, BST, MEN MAFIA) to CaseStudiesSection
+- [x] Add: Real team photos from presentation to TeamSection (Alexey Levin, Vadim Nizhnik, Vladislav Khukharev)
+- [x] Update: Site title to "LabTG — продюсерский центр" (main site) and "LabTG — партнёрская программа" (partners page)
+- [x] Update: CompanyNavbar and CompanyHeroSection badge to "Продюсерский центр"
+- [x] Update: Footer subtitles - main site shows "Продюсерский центр", partners page shows "Партнёрская программа"
+- [x] Add: Favicon from LabTG logo (blue background with white icon) to index.html
+- [x] Add: Telegram bot integration for main site contact form (CompanyContactSection)
+- [x] Add: tRPC contact.submitForm endpoint connected to Telegram bot

@@ -10,6 +10,13 @@ interface PartnerFormData {
   message: string;
 }
 
+interface ContactFormData {
+  name: string;
+  phone: string;
+  message: string;
+  source?: string;
+}
+
 /**
  * Send partner form submission to Telegram bot
  * The bot will forward the message to the configured chat/channel
@@ -80,6 +87,54 @@ function escapeHtml(text: string): string {
     "'": '&#039;',
   };
   return text.replace(/[&<>"']/g, (char) => map[char] || char);
+}
+
+/**
+ * Send main site contact form submission to Telegram bot
+ */
+export async function sendContactFormToTelegram(formData: ContactFormData): Promise<boolean> {
+  try {
+    if (!ENV.telegramBotToken) {
+      console.warn('[Telegram] Bot token not configured');
+      return false;
+    }
+
+    const messageText = `
+📩 <b>Новая заявка с сайта LabTG</b>
+
+<b>Имя:</b> ${escapeHtml(formData.name)}
+<b>Телефон:</b> ${escapeHtml(formData.phone)}
+${formData.message ? `<b>Сообщение:</b>\n${escapeHtml(formData.message)}` : ''}
+${formData.source ? `<b>Источник:</b> ${escapeHtml(formData.source)}` : ''}
+    `.trim();
+
+    const chatId = process.env.TELEGRAM_CHAT_ID || process.env.OWNER_OPEN_ID;
+
+    if (!chatId) {
+      console.warn('[Telegram] Chat ID not configured');
+      return false;
+    }
+
+    const response = await axios.post(
+      `${TELEGRAM_API_URL}/bot${ENV.telegramBotToken}/sendMessage`,
+      {
+        chat_id: chatId,
+        text: messageText,
+        parse_mode: 'HTML',
+      },
+      { timeout: 10000 }
+    );
+
+    if (response.status === 200) {
+      console.log('[Telegram] Contact form message sent successfully');
+      return true;
+    }
+
+    return false;
+  } catch (error) {
+    console.error('[Telegram] Failed to send contact form message:', error);
+    return false;
+  }
 }
 
 /**
