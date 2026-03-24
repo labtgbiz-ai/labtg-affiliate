@@ -52,6 +52,17 @@ const trpcClient = trpc.createClient({
   ],
 });
 
+// Inject analytics script at runtime (avoids broken %VITE_*% tokens in HTML)
+const analyticsEndpoint = import.meta.env.VITE_ANALYTICS_ENDPOINT;
+const analyticsWebsiteId = import.meta.env.VITE_ANALYTICS_WEBSITE_ID;
+if (analyticsEndpoint && analyticsWebsiteId && !analyticsEndpoint.includes('%VITE_')) {
+  const analyticsScript = document.createElement('script');
+  analyticsScript.defer = true;
+  analyticsScript.src = `${analyticsEndpoint}/umami`;
+  analyticsScript.setAttribute('data-website-id', analyticsWebsiteId);
+  document.body.appendChild(analyticsScript);
+}
+
 createRoot(document.getElementById("root")!).render(
   <trpc.Provider client={trpcClient} queryClient={queryClient}>
     <QueryClientProvider client={queryClient}>
