@@ -45,3 +45,5 @@
 - [x] Add language switcher to CompanyNavbar
 - [x] Audit and fix mobile/tablet responsive issues across all sections
 - [x] Test on mobile, tablet, desktop breakpoints
+- [x] Add i18n translations to /partners page (RU/EN/ES/UZ)
+- [x] Fix OG/meta preview for Telegram (main site labtg.ru)

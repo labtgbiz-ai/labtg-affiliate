@@ -2,8 +2,10 @@
    Design: Glassmorphism, sticky, brand blue CTA
 */
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function Navbar() {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -14,10 +16,10 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: '#how-it-works', label: 'Как это работает' },
-    { href: '#earnings', label: 'Условия' },
-    { href: '#calculator', label: 'Калькулятор' },
-    { href: '#about', label: 'О компании' },
+    { href: '#how-it-works', label: t('partners.navHowItWorks') },
+    { href: '#earnings', label: t('partners.navConditions') },
+    { href: '#calculator', label: t('partners.navCalculator') },
+    { href: '#about', label: t('partners.navAbout') },
   ];
 
   return (
@@ -35,7 +37,7 @@ export default function Navbar() {
             <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663458361072/CLC9CvFw6EzBzRUxKGTfc6/логотип_1_a8a68d00.png" alt="LabTG" className="h-10 w-auto" />
             <div>
               <span className="font-['Raleway'] font-900 text-xl text-gray-900 tracking-tight">LabTG</span>
-              <span className="hidden sm:block text-[10px] text-gray-400 font-medium leading-none -mt-0.5">Партнёрская программа</span>
+              <span className="hidden sm:block text-[10px] text-gray-400 font-medium leading-none -mt-0.5">{t('partners.navSubtitle')}</span>
             </div>
           </a>
 
@@ -58,7 +60,7 @@ export default function Navbar() {
               href="#contact"
               className="btn-gradient text-sm px-6 py-2.5 inline-block"
             >
-              Стать партнёром
+              {t('partners.navCta')}
             </a>
           </div>
 
@@ -66,7 +68,7 @@ export default function Navbar() {
           <button
             className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Открыть меню"
+            aria-label="Open menu"
           >
             <div className="w-5 h-4 flex flex-col justify-between">
               <span className={`block h-0.5 bg-current transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
@@ -99,7 +101,7 @@ export default function Navbar() {
             className="btn-gradient text-sm text-center mt-2"
             onClick={() => setMenuOpen(false)}
           >
-            Стать партнёром
+            {t('partners.navCta')}
           </a>
         </div>
       </div>

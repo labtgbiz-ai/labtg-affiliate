@@ -4,6 +4,7 @@
 */
 import { useState, useEffect, useRef } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useTranslation } from 'react-i18next';
 
 const CALC_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663458361072/CLC9CvFw6EzBzRUxKGTfc6/calculator-bg-iW3uGWb6ahmahUqFdSc4gL.webp';
 
@@ -48,6 +49,7 @@ function AnimatedNumber({ value, duration = 600 }: { value: number; duration?: n
 }
 
 export default function CalculatorSection() {
+  const { t } = useTranslation();
   const titleRef = useScrollReveal();
   const calcRef = useScrollReveal(0.05);
 
@@ -98,19 +100,19 @@ export default function CalculatorSection() {
     <section id="calculator" className="py-20 md:py-28 relative overflow-hidden">
       {/* BG */}
       <div className="absolute inset-0">
-        <img src={CALC_BG} alt="Калькулятор дохода партнёрской программы LabTG" className="w-full h-full object-cover" />
+        <img src={CALC_BG} alt="Income calculator background" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-white/85" />
       </div>
 
       <div className="container relative z-10">
         {/* Title */}
         <div ref={titleRef as any} className="reveal text-center mb-12">
-          <span className="pill-badge pill-badge-light mb-4 inline-flex">Калькулятор дохода</span>
+          <span className="pill-badge pill-badge-light mb-4 inline-flex">{t('partners.calcBadge')}</span>
           <h2 className="font-['Raleway'] font-black text-3xl md:text-5xl text-gray-900 mt-3">
-            Посчитайте свой доход
+            {t('partners.calcTitle')}
           </h2>
           <p className="text-gray-500 text-lg mt-4 max-w-2xl mx-auto">
-            Настройте параметры и увидите, сколько вы можете заработать с партнёрской программой LabTG
+            {t('partners.calcSubtitle')}
           </p>
         </div>
 
@@ -127,7 +129,7 @@ export default function CalculatorSection() {
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                Этап 1
+                {t('partners.calcStage1')}
               </button>
               <button
                 onClick={() => setStage('2')}
@@ -137,7 +139,7 @@ export default function CalculatorSection() {
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                Этап 2
+                {t('partners.calcStage2')}
               </button>
             </div>
 
@@ -145,7 +147,7 @@ export default function CalculatorSection() {
             <div className="space-y-6 mb-8">
               <div>
                 <div className="flex justify-between items-center mb-2">
-                  <label className="font-['Raleway'] font-bold text-gray-900">Лично лидов</label>
+                  <label className="font-['Raleway'] font-bold text-gray-900">{t('partners.calcPersonalLeads')}</label>
                   <span className="text-[#1E9BF0] font-bold">{personalLeads}</span>
                 </div>
                 <input
@@ -165,7 +167,7 @@ export default function CalculatorSection() {
 
               <div>
                 <div className="flex justify-between items-center mb-2">
-                  <label className="font-['Raleway'] font-bold text-gray-900">От партнёра</label>
+                  <label className="font-['Raleway'] font-bold text-gray-900">{t('partners.calcSubPartnerLeads')}</label>
                   <span className="text-[#1E9BF0] font-bold">{subPartnerLeads}</span>
                 </div>
                 <input
@@ -185,7 +187,7 @@ export default function CalculatorSection() {
 
               <div>
                 <div className="flex justify-between items-center mb-2">
-                  <label className="font-['Raleway'] font-bold text-gray-900">Рекл. бюджет</label>
+                  <label className="font-['Raleway'] font-bold text-gray-900">{t('partners.calcAdBudget')}</label>
                   <span className="text-[#1E9BF0] font-bold">{formatRub(adBudgetPerLead)}</span>
                 </div>
                 <input
@@ -207,14 +209,14 @@ export default function CalculatorSection() {
 
             {/* Fixed params */}
             <div className="bg-gray-50 rounded-2xl p-4 mb-8">
-              <div className="text-sm text-gray-600 font-semibold mb-3">Фиксированные параметры LabTG:</div>
+              <div className="text-sm text-gray-600 font-semibold mb-3">{t('partners.calcFixedParams')}</div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <div className="text-xs text-gray-500">Средний чек</div>
+                  <div className="text-xs text-gray-500">{t('partners.calcAvgCheck')}</div>
                   <div className="font-['Raleway'] font-bold text-lg text-gray-900">800 000 ₽</div>
                 </div>
                 <div>
-                  <div className="text-xs text-gray-500">Конверсия в продажу</div>
+                  <div className="text-xs text-gray-500">{t('partners.calcConversion')}</div>
                   <div className="font-['Raleway'] font-bold text-lg text-gray-900">20%</div>
                 </div>
               </div>
@@ -222,19 +224,19 @@ export default function CalculatorSection() {
 
             {/* Results */}
             <div className="bg-gradient-to-br from-[#1E9BF0]/10 to-[#D4D4FF]/10 rounded-2xl p-6 border border-[#1E9BF0]/20">
-              <div className="text-sm text-gray-600 font-semibold mb-2">Ваш доход</div>
+              <div className="text-sm text-gray-600 font-semibold mb-2">{t('partners.calcYourIncome')}</div>
               <div className="font-['Raleway'] font-black text-4xl md:text-5xl text-[#1E9BF0] mb-1">
                 <AnimatedNumber value={total} />
               </div>
               <div className="text-xs text-gray-500">
-                {stage === '1' ? 'за первый договор' : 'в месяц (постоплата)'}
+                {stage === '1' ? t('partners.calcStage1Suffix') : t('partners.calcStage2Suffix')}
               </div>
             </div>
 
             {/* CTA */}
-            <button className="w-full mt-8 bg-[#1E9BF0] hover:bg-[#1a7fb8] text-white font-['Raleway'] font-bold py-4 rounded-xl transition-all shadow-lg hover:shadow-xl">
-              Хочу столько →
-            </button>
+            <a href="#contact" className="block w-full mt-8 bg-[#1E9BF0] hover:bg-[#1a7fb8] text-white font-['Raleway'] font-bold py-4 rounded-xl transition-all shadow-lg hover:shadow-xl text-center">
+              {t('partners.calcCta')}
+            </a>
           </div>
         </div>
       </div>

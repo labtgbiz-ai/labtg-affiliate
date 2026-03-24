@@ -1,7 +1,19 @@
 /* LabTG Affiliate — Footer
    Design: Dark bg, brand info, links
 */
+import { useTranslation } from 'react-i18next';
+
 export default function Footer() {
+  const { t } = useTranslation();
+
+  const navLinks = [
+    { href: '#how-it-works', label: t('partners.footerNavHowItWorks') },
+    { href: '#earnings', label: t('partners.footerNavConditions') },
+    { href: '#calculator', label: t('partners.footerNavCalculator') },
+    { href: '#about', label: t('partners.footerNavAbout') },
+    { href: '#contact', label: t('partners.footerNavContact') },
+  ];
+
   return (
     <footer className="bg-white text-gray-900 py-12 md:py-16 border-t border-gray-100">
       <div className="container">
@@ -12,31 +24,25 @@ export default function Footer() {
               <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663458361072/CLC9CvFw6EzBzRUxKGTfc6/логотип_1_a8a68d00.png" alt="LabTG" className="h-10 w-auto" />
               <div>
                 <span className="font-['Raleway'] font-black text-lg tracking-tight text-gray-900">LabTG</span>
-                <span className="block text-[10px] font-medium text-gray-400">Партнёрская программа</span>
+                <span className="block text-[10px] font-medium text-gray-400">{t('partners.footerSubtitle')}</span>
               </div>
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Партнёрская программа продюсерского центра LabTG. Зарабатывайте на рекомендациях AI-маркетинга.
+              {t('partners.footerDesc')}
             </p>
             <div className="flex items-center gap-1.5 mt-3">
               <div className="w-2 h-2 rounded-full bg-green-500" />
-              <span className="text-gray-500 text-xs">Принимаем партнёров</span>
+              <span className="text-gray-500 text-xs">{t('partners.footerAccepting')}</span>
             </div>
           </div>
 
           {/* Navigation */}
           <div>
             <h4 className="font-['Raleway'] font-bold text-sm text-gray-900 mb-4 uppercase tracking-wider">
-              Навигация
+              {t('partners.footerNavTitle')}
             </h4>
             <ul className="space-y-2">
-              {[
-                { href: '#how-it-works', label: 'Как это работает' },
-                { href: '#earnings', label: 'Условия программы' },
-                { href: '#calculator', label: 'Калькулятор дохода' },
-                { href: '#about', label: 'О компании' },
-                { href: '#contact', label: 'Стать партнёром' },
-              ].map((link) => (
+              {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
@@ -52,7 +58,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 className="font-['Raleway'] font-bold text-sm text-gray-900 mb-4 uppercase tracking-wider">
-              Контакты
+              {t('partners.footerContactTitle')}
             </h4>
             <div className="space-y-3">
               <a
@@ -67,7 +73,7 @@ export default function Footer() {
                 @labtg_manager
               </a>
               <p className="text-gray-500 text-xs">
-                Ответим в течение 24 часов
+                {t('partners.footerResponse')}
               </p>
             </div>
 
@@ -76,7 +82,7 @@ export default function Footer() {
                 href="#contact"
                 className="btn-gradient text-sm px-6 py-2.5 inline-block"
               >
-                Стать партнёром
+                {t('partners.footerCta')}
               </a>
             </div>
           </div>
@@ -84,10 +90,10 @@ export default function Footer() {
 
         <div className="border-t border-gray-200 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="text-gray-500 text-xs">
-            © 2024 LabTG — Продюсерский центр. Все права защищены.
+            {t('partners.footerRights')}
           </p>
           <p className="text-gray-600 text-xs">
-            Партнёрская программа · Выплаты по договору
+            {t('partners.footerTagline')}
           </p>
         </div>
       </div>

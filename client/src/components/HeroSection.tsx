@@ -3,10 +3,12 @@
    Text is dark (charcoal) because background is light/white
 */
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const HERO_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663458361072/CLC9CvFw6EzBzRUxKGTfc6/hero-3d-telegram-SURwPLygaKnTXXRSpeqSi2.webp';
 
 export default function HeroSection() {
+  const { t } = useTranslation();
   const headingRef = useRef<HTMLHeadingElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -27,6 +29,12 @@ export default function HeroSection() {
     });
   }, []);
 
+  const stats = [
+    { value: t('partners.heroStat1Value'), label: t('partners.heroStat1Label') },
+    { value: t('partners.heroStat2Value'), label: t('partners.heroStat2Label') },
+    { value: t('partners.heroStat3Value'), label: t('partners.heroStat3Label') },
+  ];
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-white pt-20">
       {/* Gradient blobs */}
@@ -41,32 +49,28 @@ export default function HeroSection() {
             {/* Badge */}
             <div ref={headingRef as any} className="inline-flex">
               <span className="pill-badge pill-badge-blue text-sm">
-                🚀 Партнёрская программа LabTG
+                {t('partners.heroBadge')}
               </span>
             </div>
 
             {/* Headline */}
             <div>
                <h1 className="font['Raleway'] font-black text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-[1.1] tracking-tight" style={{paddingTop: '3px', paddingBottom: '14px', paddingLeft: '0px'}}>
-                Зарабатывайте{' '}
-                <span className="gradient-text whitespace-nowrap">от 1 000 000 ₽</span>{' '}
-                рекомендуя LabTG
+                {t('partners.heroTitle1')}{' '}
+                <span className="gradient-text whitespace-nowrap">{t('partners.heroTitleHighlight')}</span>{' '}
+                {t('partners.heroTitle2')}
               </h1>
             </div>
 
             {/* Sub */}
             <p ref={subRef} className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg">
-              Рекомендуйте LabTG и получайте{' '}
-              <strong className="text-gray-900">7% с каждой продажи</strong> + пожизненные выплаты на втором этапе.
+              {t('partners.heroSubtitle')}{' '}
+              <strong className="text-gray-900">{t('partners.heroSubtitleBold')}</strong> {t('partners.heroSubtitleSuffix')}
             </p>
 
             {/* Stats row */}
             <div className="flex flex-wrap gap-6">
-              {[
-                { value: '7%', label: 'с каждой продажи' },
-                { value: '800К', label: 'средний чек' },
-                { value: '∞', label: 'пожизненно' },
-              ].map((stat) => (
+              {stats.map((stat) => (
                 <div key={stat.label} className="flex flex-col">
                   <span className="font-['Raleway'] font-black text-3xl text-[#1E9BF0]">{stat.value}</span>
                   <span className="text-sm text-gray-500 font-medium">{stat.label}</span>
@@ -77,13 +81,13 @@ export default function HeroSection() {
             {/* CTA buttons */}
             <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3">
               <a href="#contact" className="btn-gradient text-center text-base px-8 py-4 animate-pulse-glow">
-                Стать партнёром →
+                {t('partners.heroCta1')}
               </a>
               <a
                 href="#calculator"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border-2 border-[#1E9BF0] text-[#1E9BF0] font-bold text-base hover:bg-blue-50 transition-colors"
               >
-                Рассчитать доход
+                {t('partners.heroCta2')}
               </a>
             </div>
 
@@ -92,7 +96,7 @@ export default function HeroSection() {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-green-500 flex-shrink-0">
                 <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              Выплаты по договору · Прозрачная аналитика · Поддержка 24/7
+              {t('partners.heroTrust')}
             </p>
           </div>
 
@@ -105,12 +109,12 @@ export default function HeroSection() {
               <div className="animate-float relative z-10">
                 <img
                   src={HERO_IMG}
-                  alt="LabTG — технология лид в 1 клик"
+                  alt="LabTG — lead in 1 click technology"
                   className="w-full h-auto object-contain drop-shadow-2xl"
                 />
               </div>
 
-              {/* Floating badge: 1 клик */}
+              {/* Floating badge: 1 click */}
               <div className="absolute top-8 left-0 glass-card rounded-2xl px-4 py-3 shadow-xl z-20 animate-float" style={{ animationDelay: '-2s' }}>
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-full bg-[#1E9BF0] flex items-center justify-center">
@@ -119,8 +123,8 @@ export default function HeroSection() {
                     </svg>
                   </div>
                   <div>
-                    <div className="text-xs text-gray-500 font-medium">Технология</div>
-                    <div className="text-sm font-bold text-gray-900">Лид в 1 клик</div>
+                    <div className="text-xs text-gray-500 font-medium">{t('partners.whyKillerBadge')}</div>
+                    <div className="text-sm font-bold text-gray-900">{t('partners.whyKillerTitle')}</div>
                   </div>
                 </div>
               </div>
@@ -133,7 +137,7 @@ export default function HeroSection() {
                   </div>
                   <div>
                     <div className="text-xs text-gray-500 font-medium">ChatGPT 5.2</div>
-                    <div className="text-sm font-bold text-gray-900">AI-лид-агент</div>
+                    <div className="text-sm font-bold text-gray-900">AI Lead Agent</div>
                   </div>
                 </div>
               </div>
@@ -141,8 +145,8 @@ export default function HeroSection() {
               {/* Floating badge: Postpay */}
               <div className="absolute top-1/2 -right-4 glass-card rounded-2xl px-4 py-3 shadow-xl z-20 animate-float" style={{ animationDelay: '-1s' }}>
                 <div className="text-center">
-                  <div className="text-xs text-gray-500 font-medium">Оплата</div>
-                  <div className="text-sm font-bold text-[#1E9BF0]">Постоплата</div>
+                  <div className="text-xs text-gray-500 font-medium">{t('partners.postpayLabel')}</div>
+                  <div className="text-sm font-bold text-[#1E9BF0]">{t('partners.stage2Title')}</div>
                 </div>
               </div>
             </div>

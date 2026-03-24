@@ -6,8 +6,10 @@ import { useState } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { trpc } from '@/lib/trpc';
 import { toast } from 'sonner';
+import { useTranslation } from 'react-i18next';
 
 export default function ContactSection() {
+  const { t } = useTranslation();
   const titleRef = useScrollReveal();
   const formRef = useScrollReveal(0.1);
 
@@ -26,14 +28,13 @@ export default function ContactSection() {
       }
     },
     onError: (error) => {
-      toast.error('Ошибка отправки. Попробуйте позже.');
+      toast.error(t('partners.contactErrSend'));
       console.error('Form submission error:', error);
     },
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    // Clear error for this field
     if (errors[e.target.name]) {
       setErrors({ ...errors, [e.target.name]: '' });
     }
@@ -43,21 +44,21 @@ export default function ContactSection() {
     const newErrors: Record<string, string> = {};
 
     if (!form.name.trim() || form.name.length < 2) {
-      newErrors.name = 'Имя должно быть минимум 2 символа';
+      newErrors.name = t('partners.contactErrName');
     }
 
     const phoneRegex = /^\+?[0-9\s\-()]{10,}$/;
     if (!form.phone.trim() || !phoneRegex.test(form.phone)) {
-      newErrors.phone = 'Некорректный номер телефона';
+      newErrors.phone = t('partners.contactErrPhone');
     }
 
     const telegramRegex = /^@?[a-zA-Z0-9_]{5,32}$/;
     if (!form.telegram.trim() || !telegramRegex.test(form.telegram)) {
-      newErrors.telegram = 'Некорректное имя пользователя Telegram (5-32 символа)';
+      newErrors.telegram = t('partners.contactErrTg');
     }
 
     if (!form.message.trim() || form.message.length < 10) {
-      newErrors.message = 'Сообщение должно быть минимум 10 символов';
+      newErrors.message = t('partners.contactErrMsg');
     }
 
     setErrors(newErrors);
@@ -68,7 +69,7 @@ export default function ContactSection() {
     e.preventDefault();
 
     if (!validateForm()) {
-      toast.error('Пожалуйста, заполните все поля корректно');
+      toast.error(t('partners.contactErrFill'));
       return;
     }
 
@@ -89,12 +90,12 @@ export default function ContactSection() {
       <div className="container relative z-10">
         {/* Title */}
         <div ref={titleRef as any} className="reveal text-center mb-12">
-          <span className="pill-badge pill-badge-blue mb-4 inline-flex">Присоединиться</span>
+          <span className="pill-badge pill-badge-blue mb-4 inline-flex">{t('partners.contactBadge')}</span>
           <h2 className="font-['Raleway'] font-black text-3xl md:text-5xl text-gray-900 mt-3">
-            Стать партнёром LabTG
+            {t('partners.contactTitle')}
           </h2>
           <p className="text-gray-500 text-lg mt-4 max-w-xl mx-auto">
-            Оставьте заявку — мы свяжемся в течение 24 часов, ответим на вопросы и подпишем партнёрский договор
+            {t('partners.contactSubtitle')}
           </p>
         </div>
 
@@ -105,21 +106,21 @@ export default function ContactSection() {
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Ваше имя <span className="text-red-400">*</span>
+                      {t('partners.contactNameLabel')} <span className="text-red-400">*</span>
                     </label>
                     <input
                       type="text"
                       name="name"
                       value={form.name}
                       onChange={handleChange}
-                      placeholder="Алексей Иванов"
+                      placeholder={t('partners.contactNamePlaceholder')}
                       className={`w-full px-4 py-3 rounded-xl border ${errors.name ? 'border-red-400' : 'border-gray-200'} bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E9BF0]/30 focus:border-[#1E9BF0] transition-all text-sm`}
                     />
                     {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Телефон <span className="text-red-400">*</span>
+                      {t('partners.contactPhoneLabel')} <span className="text-red-400">*</span>
                     </label>
                     <input
                       type="tel"
@@ -135,7 +136,7 @@ export default function ContactSection() {
 
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Telegram <span className="text-gray-400 font-normal">(для связи)</span>
+                    {t('partners.contactTgLabel')} <span className="text-gray-400 font-normal">{t('partners.contactTgNote')}</span>
                   </label>
                   <div className="relative">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">@</span>
@@ -153,14 +154,14 @@ export default function ContactSection() {
 
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Расскажите о себе <span className="text-red-400">*</span>
+                    {t('partners.contactMsgLabel')} <span className="text-red-400">*</span>
                   </label>
                   <textarea
                     name="message"
                     value={form.message}
                     onChange={handleChange}
                     rows={3}
-                    placeholder="Кто вы, какая аудитория, почему хотите стать партнёром..."
+                    placeholder={t('partners.contactMsgPlaceholder')}
                     className={`w-full px-4 py-3 rounded-xl border ${errors.message ? 'border-red-400' : 'border-gray-200'} bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E9BF0]/30 focus:border-[#1E9BF0] transition-all text-sm resize-none`}
                   />
                   {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message}</p>}
@@ -176,11 +177,11 @@ export default function ContactSection() {
                       <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none">
                         <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="3" strokeDasharray="30 60"/>
                       </svg>
-                      Отправляем...
+                      {t('partners.contactSending')}
                     </>
                   ) : (
                     <>
-                      Отправить заявку
+                      {t('partners.contactSubmit')}
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="22" y1="2" x2="11" y2="13"/>
                         <polygon points="22 2 15 22 11 13 2 9 22 2"/>
@@ -190,13 +191,13 @@ export default function ContactSection() {
                 </button>
 
                 <p className="text-center text-xs text-gray-400">
-                  Нажимая кнопку, вы соглашаетесь на обработку персональных данных
+                  {t('partners.contactPrivacy')}
                 </p>
               </form>
 
               {/* Or Telegram */}
               <div className="mt-6 pt-6 border-t border-gray-100 text-center">
-                <p className="text-sm text-gray-500 mb-3">Или напишите нам напрямую</p>
+                <p className="text-sm text-gray-500 mb-3">{t('partners.contactOrDirect')}</p>
                 <a
                   href="https://t.me/labtg_manager"
                   target="_blank"
@@ -206,7 +207,7 @@ export default function ContactSection() {
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/>
                   </svg>
-                  Написать в Telegram
+                  {t('partners.contactTgBtn')}
                 </a>
               </div>
             </div>
@@ -218,10 +219,10 @@ export default function ContactSection() {
                 </svg>
               </div>
               <h3 className="font-['Raleway'] font-black text-2xl text-gray-900 mb-3">
-                Заявка отправлена!
+                {t('partners.contactSuccessTitle')}
               </h3>
               <p className="text-gray-500 text-base leading-relaxed">
-                Наш менеджер свяжется с вами в течение 24 часов. Пока можете изучить условия программы или написать нам в Telegram.
+                {t('partners.contactSuccessDesc')}
               </p>
               <a
                 href="https://t.me/labtg_manager"
@@ -229,7 +230,7 @@ export default function ContactSection() {
                 rel="noopener noreferrer"
                 className="btn-gradient inline-block mt-6 text-sm px-8 py-3"
               >
-                Написать в Telegram
+                {t('partners.contactTgBtn')}
               </a>
             </div>
           )}
