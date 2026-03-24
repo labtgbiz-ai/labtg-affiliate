@@ -47,3 +47,4 @@
 - [x] Test on mobile, tablet, desktop breakpoints
 - [x] Add i18n translations to /partners page (RU/EN/ES/UZ)
 - [x] Fix OG/meta preview for Telegram (main site labtg.ru)
+- [x] Add language switcher to /partners page Navbar
