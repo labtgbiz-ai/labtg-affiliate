@@ -167,6 +167,42 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          // Core React runtime - cached separately
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
+            return 'vendor-react';
+          }
+          // tRPC + React Query - changes rarely
+          if (id.includes('@trpc/') || id.includes('@tanstack/react-query') || id.includes('superjson')) {
+            return 'vendor-trpc';
+          }
+          // Radix UI components (shadcn/ui base)
+          if (id.includes('@radix-ui/')) {
+            return 'vendor-radix';
+          }
+          // Utility libraries
+          if (id.includes('lucide-react') || id.includes('class-variance-authority') || id.includes('clsx') || id.includes('tailwind-merge')) {
+            return 'vendor-ui';
+          }
+          // Routing
+          if (id.includes('wouter')) {
+            return 'vendor-router';
+          }
+          // Animation / other large libs
+          if (id.includes('framer-motion') || id.includes('date-fns') || id.includes('streamdown')) {
+            return 'vendor-misc';
+          }
+          // All other node_modules
+          if (id.includes('node_modules/')) {
+            return 'vendor-other';
+          }
+        },
+      },
+    },
+    // Increase chunk size warning threshold
+    chunkSizeWarningLimit: 600,
   },
   server: {
     host: true,
