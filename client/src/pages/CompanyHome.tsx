@@ -2,6 +2,7 @@
    Full presentation structure:
    Hero → About → Services → AI Lead Agent → Lead Attraction → Content → Producing → Team → Principles → Next Step CTA → Footer
 */
+import { useEffect } from 'react';
 import CompanyNavbar from '@/components/CompanyNavbar';
 import CompanyHeroSection from '@/components/CompanyHeroSection';
 import CompanyAboutSection from '@/components/CompanyAboutSection';
@@ -17,6 +18,10 @@ import NextStepSection from '@/components/NextStepSection';
 import CompanyFooter from '@/components/CompanyFooter';
 
 export default function CompanyHome() {
+  useEffect(() => {
+    document.title = 'LabTG — продюсерский центр';
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <CompanyNavbar />
