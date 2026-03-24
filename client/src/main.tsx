@@ -52,21 +52,37 @@ const trpcClient = trpc.createClient({
   ],
 });
 
-// Inject analytics script at runtime (avoids broken %VITE_*% tokens in HTML)
-const analyticsEndpoint = import.meta.env.VITE_ANALYTICS_ENDPOINT;
-const analyticsWebsiteId = import.meta.env.VITE_ANALYTICS_WEBSITE_ID;
-if (analyticsEndpoint && analyticsWebsiteId && !analyticsEndpoint.includes('%VITE_')) {
-  const analyticsScript = document.createElement('script');
-  analyticsScript.defer = true;
-  analyticsScript.src = `${analyticsEndpoint}/umami`;
-  analyticsScript.setAttribute('data-website-id', analyticsWebsiteId);
-  document.body.appendChild(analyticsScript);
+function mountApp() {
+  // Inject analytics script at runtime (avoids broken %VITE_*% tokens in HTML)
+  const analyticsEndpoint = import.meta.env.VITE_ANALYTICS_ENDPOINT;
+  const analyticsWebsiteId = import.meta.env.VITE_ANALYTICS_WEBSITE_ID;
+  if (analyticsEndpoint && analyticsWebsiteId && !analyticsEndpoint.includes('%VITE_')) {
+    const analyticsScript = document.createElement('script');
+    analyticsScript.defer = true;
+    analyticsScript.src = `${analyticsEndpoint}/umami`;
+    analyticsScript.setAttribute('data-website-id', analyticsWebsiteId);
+    document.body.appendChild(analyticsScript);
+  }
+
+  const rootEl = document.getElementById("root");
+  if (!rootEl) {
+    console.error("[App] #root element not found, retrying...");
+    setTimeout(mountApp, 50);
+    return;
+  }
+
+  createRoot(rootEl).render(
+    <trpc.Provider client={trpcClient} queryClient={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </trpc.Provider>
+  );
 }
 
-createRoot(document.getElementById("root")!).render(
-  <trpc.Provider client={trpcClient} queryClient={queryClient}>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
-  </trpc.Provider>
-);
+// Wait for DOM to be fully ready before mounting
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", mountApp);
+} else {
+  mountApp();
+}
