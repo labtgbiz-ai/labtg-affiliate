@@ -50,7 +50,7 @@ export default function CompanyHeroSection() {
 
             {/* Headline */}
             <div className="hero-animate">
-              <h1 className="font-['Raleway'] font-black text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl text-gray-900 leading-[1.08] tracking-tight" style={{fontSize: '27px'}}>
+              <h1 className="font-['Raleway'] font-black text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl text-gray-900 leading-[1.08] tracking-tight" style={{fontSize: '28px'}}>
                 {t('hero.title1')}{' '}
                 <span className="gradient-text">{t('hero.title2')}</span>
                 {t('hero.title3')}{' '}
