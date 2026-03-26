@@ -38,7 +38,7 @@ export default function CompanyHeroSection() {
       <div className="blob w-[300px] h-[300px] bg-blue-100/30 top-1/2 left-1/3" style={{ position: 'absolute' }} />
 
       <div className="container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-8 items-center min-h-[calc(100vh-80px)] py-12">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-8 items-center min-h-[calc(100vh-80px)] py-12" style={{paddingTop: '26px'}}>
           {/* Left: Text */}
           <div className="flex flex-col gap-6 lg:gap-7">
             {/* Badge */}
@@ -50,7 +50,7 @@ export default function CompanyHeroSection() {
 
             {/* Headline */}
             <div className="hero-animate">
-              <h1 className="font-['Raleway'] font-black text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl text-gray-900 leading-[1.08] tracking-tight">
+              <h1 className="font-['Raleway'] font-black text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl text-gray-900 leading-[1.08] tracking-tight" style={{fontSize: '26px'}}>
                 {t('hero.title1')}{' '}
                 <span className="gradient-text">{t('hero.title2')}</span>
                 {t('hero.title3')}{' '}
