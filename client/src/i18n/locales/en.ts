@@ -18,7 +18,7 @@ const en = {
     title1: 'Marketing',
     title2: '"Turnkey"',
     title3: ', AI Agents &',
-    title4: 'Targeted Leads in Telegram',
+    title4: 'Targeted Leads in Telegram with Postpayment',
     subtitle: 'Full-cycle marketing and sales for your business. From strategy to automation — all in Telegram.',
     stat1Value: '100%',
     stat1Label: 'turnkey',

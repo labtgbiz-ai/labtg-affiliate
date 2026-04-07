@@ -13,7 +13,7 @@ export default function TeamSection() {
       initials: 'АЛ',
       photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663458361072/CLC9CvFw6EzBzRUxKGTfc6/alexey-levin_7627f79f.png',
       highlights: [
-        { label: '3 ' + t('team.years'), desc: t('team.m1h1') },
+        { label: '3+ ' + t('team.years'), desc: t('team.m1h1') },
         { label: '5+ ' + t('team.years'), desc: t('team.m1h2') },
       ],
       achievements: [t('team.m1a1'), t('team.m1a2'), t('team.m1a3')],

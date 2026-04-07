@@ -18,7 +18,7 @@ const uz = {
     title1: 'Marketing',
     title2: '"kalit tayyor"',
     title3: ', AI-agentlar va',
-    title4: 'Telegramdagi maqsadli lidlar',
+    title4: 'Telegramdagi maqsadli lidlar to\'lov so\'ng\'i',
     subtitle: 'Biznesingiz uchun to\'liq marketing va savdo sikli. Strategiyadan avtomatizatsiyagacha — hammasi Telegramda.',
     stat1Value: '100%',
     stat1Label: 'kalit tayyor',

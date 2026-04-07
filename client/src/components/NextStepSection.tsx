@@ -59,7 +59,7 @@ export default function NextStepSection() {
 
         <div className="text-center fade-up" data-delay="0.3">
           <a
-            href="https://t.me/labtg_manager"
+            href="https://t.me/m/D96DmiAqODc6"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-gradient inline-flex items-center gap-3 text-lg px-10 py-5 shadow-xl"

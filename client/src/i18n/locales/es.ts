@@ -18,7 +18,7 @@ const es = {
     title1: 'Marketing',
     title2: '"Llave en Mano"',
     title3: ', Agentes IA y',
-    title4: 'Leads Dirigidos en Telegram',
+    title4: 'Leads Dirigidos en Telegram con Pago Posterior',
     subtitle: 'Marketing y ventas de ciclo completo para su negocio. De la estrategia a la automatización — todo en Telegram.',
     stat1Value: '100%',
     stat1Label: 'llave en mano',
